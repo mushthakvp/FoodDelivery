@@ -3,7 +3,7 @@ import 'package:food_delivery/core/color/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 gFontsOleo({double sz = 16, double ls = 0, FontWeight fw = FontWeight.normal, Color cl = blackColor}) {
-  return GoogleFonts.oleoScriptSwashCaps(
+  return GoogleFonts.mukta(
     fontSize: sz,
     letterSpacing: ls,
     fontWeight: fw,
