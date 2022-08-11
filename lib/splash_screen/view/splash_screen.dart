@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
-
+import 'package:food_delivery/splash_screen/viewmodel/splash_pov.dart';
+import 'package:provider/provider.dart';
 import '../../core/styles/images.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -8,34 +9,24 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              secondaryColor,
-              primaryColor,
-            ],
-          ),
-          image: DecorationImage(
-            image: AssetImage(
-              backGrounImage,
+    return Consumer<SplashPov>(
+      builder: (context, value, child) => Scaffold(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [
+                secondaryColor,
+                primaryColor,
+              ],
+            ),
+            image: DecorationImage(
+              image: AssetImage(
+                backGrounImage,
+              ),
             ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Column(
-                children: const [Text('Sign in to continue')],
-              ),
-            )
-          ],
         ),
       ),
     );
