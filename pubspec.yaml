@@ -10,10 +10,12 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  firebase_auth: ^3.6.2
   flutter:
     sdk: flutter
   flutter_signin_button: ^2.0.0
   google_fonts: ^3.0.1
+  google_sign_in: ^5.4.1
   provider: ^6.0.3
 
 dev_dependencies:
