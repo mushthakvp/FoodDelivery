@@ -12,7 +12,8 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: scafoldColor,
       drawer: const Drawer(),
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: blackColor
+        ,
         title: const Text('Home'),
         actions: const [
           CircleAvatar(
@@ -38,15 +39,50 @@ class HomeScreen extends StatelessWidget {
         children: [
           const CarouselWidget(),
           const ViewAllWidget(),
-          ListView(
-            scrollDirection: Axis.horizontal,
+          Row(
             children: [
               Container(
                 margin: const EdgeInsets.all(10),
                 height: 200,
                 width: 160,
-                decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(12)),
-              )
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Center(
+                        child: Image.network(
+                          'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 8,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Fresh Basil',
+                              style: gFontsOleo(
+                                fw: FontWeight.bold,
+                              ),
+                            ),
+                            const Text('Fresh Basil'),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           )
         ],
