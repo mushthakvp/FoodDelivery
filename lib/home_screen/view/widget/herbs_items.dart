@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
+import '../../../product_overview/view/product_overview_screen.dart';
+import '../../../routes/routes.dart';
 
 class HerbsItems extends StatelessWidget {
   const HerbsItems({
@@ -22,10 +24,17 @@ class HerbsItems extends StatelessWidget {
         children: [
           Expanded(
             flex: 4,
-            child: Center(
-              child: Image.network(
-                'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
-                fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () {
+                Routes.push(
+                  screen: const ProductOverviewScreen(),
+                );
+              },
+              child: Center(
+                child: Image.network(
+                  'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
