@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
           const CarouselWidget(),
           const ViewAllWidget(name: 'Herbs Seasonings'),
           LimitedBox(
-            maxHeight: 240,
+            maxHeight: 220,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const ViewAllWidget(name: 'Fresh Fruits'),
           LimitedBox(
-            maxHeight: 240,
+            maxHeight: 220,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
