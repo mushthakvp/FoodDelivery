@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
 import 'package:food_delivery/home_screen/view/widget/carousel_widget.dart';
+import 'package:food_delivery/home_screen/view/widget/fresh_fruit_items.dart';
+import 'package:food_delivery/home_screen/view/widget/herbs_items.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -10,24 +12,45 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scafoldColor,
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: Container(
+          color: blackColor,
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Row(
+                  children: const [
+                    CircleAvatar(
+                      backgroundColor: whiteColor,
+                      radius: 43,
+                      child: CircleAvatar(
+                        backgroundColor: blackColor,
+                        radius: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
-        backgroundColor: blackColor
-        ,
+        backgroundColor: blackColor,
         title: const Text('Home'),
-        actions: const [
+        actions: [
           CircleAvatar(
-            backgroundColor: Color(0xFFDAD67C),
-            child: Icon(
+            backgroundColor: whiteColor.withOpacity(.6),
+            child: const Icon(
               Icons.search,
               size: 17,
               color: blackColor,
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           CircleAvatar(
-            backgroundColor: Color(0xFFDAD67C),
-            child: Icon(
+            backgroundColor: whiteColor.withOpacity(.6),
+            child: const Icon(
               Icons.shop,
               size: 17,
               color: blackColor,
@@ -35,56 +58,34 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           const CarouselWidget(),
-          const ViewAllWidget(),
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(10),
-                height: 200,
-                width: 160,
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Center(
-                        child: Image.network(
-                          'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 8,
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Fresh Basil',
-                              style: gFontsOleo(
-                                fw: FontWeight.bold,
-                              ),
-                            ),
-                            const Text('Fresh Basil'),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          )
+          const ViewAllWidget(name: 'Herbs Seasonings'),
+          LimitedBox(
+            maxHeight: 240,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: 30,
+              itemBuilder: (context, index) {
+                return const HerbsItems();
+              },
+            ),
+          ),
+          const ViewAllWidget(name: 'Fresh Fruits'),
+          LimitedBox(
+            maxHeight: 240,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: 30,
+              itemBuilder: (context, index) {
+                return const FreshFruitItems();
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -92,9 +93,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class ViewAllWidget extends StatelessWidget {
-  const ViewAllWidget({
-    Key? key,
-  }) : super(key: key);
+  final String name;
+  const ViewAllWidget({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class ViewAllWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Herbs Seasonings',
+            name,
             style: gFontsOleo(),
           ),
           Text(
