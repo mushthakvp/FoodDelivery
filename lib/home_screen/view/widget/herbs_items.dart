@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/styles/images.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
-import '../../../product_overview/view/product_overview_screen.dart';
+import '../../../product_overview_screen/view/product_overview_screen.dart';
 import '../../../routes/routes.dart';
 
 class HerbsItems extends StatelessWidget {

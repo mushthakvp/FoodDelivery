@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
+import '../viewmodel/product_overview_pov.dart';
 import 'widget/bottom_bar.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
@@ -17,7 +18,9 @@ class ProductOverviewScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.share),
+            icon: const Icon(
+              Icons.share,
+            ),
           ),
           IconButton(
             onPressed: () {},
@@ -46,10 +49,25 @@ class ProductOverviewScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('\$50 MRP', style: gFontsOleo(sz: 20)),
-                    Text('50 in a Stock', style: gFontsOleo(sz: 20)),
+                    Text('50 KG left in Stock', style: gFontsOleo(sz: 20)),
                   ],
                 ),
-                Text('Description', style: gFontsOleo(sz: 20, cl: greyColor)),
+                LimitedBox(
+                  maxHeight: 60,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: ProductOverviewPov.quantity.length,
+                    itemBuilder: (context, index) {
+                      final data = ProductOverviewPov.quantity[index];
+                      return ItemQuantity(data: data);
+                    },
+                  ),
+                ),
+                Text(
+                  'Description',
+                  style: gFontsOleo(sz: 20, cl: greyColor),
+                ),
                 Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.", style: gFontsOleo(sz: 16)),
               ],
             ),
@@ -67,12 +85,42 @@ class ProductOverviewScreen extends StatelessWidget {
           ),
           BottomWidget(
             iconColor: blackColor,
-            icon: Icons.shopping_bag,
+            icon: Icons.shopping_bag_outlined,
             color: blackColor,
             title: 'Buy now',
             backGroundColor: whiteColor,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ItemQuantity extends StatelessWidget {
+  final dynamic data;
+  const ItemQuantity({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(right: 10, top: 5, bottom: 5),
+      padding: const EdgeInsets.all(6),
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: blackColor),
+      ),
+      child: Center(
+        child: FittedBox(
+          child: Text(
+            data,
+            style: gFontsOleo(sz: 12),
+          ),
+        ),
       ),
     );
   }

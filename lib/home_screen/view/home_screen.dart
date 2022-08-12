@@ -40,20 +40,20 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Home'),
         actions: [
           CircleAvatar(
-            backgroundColor: whiteColor.withOpacity(.6),
+            backgroundColor: whiteColor.withOpacity(.3),
             child: const Icon(
               Icons.search,
-              size: 17,
-              color: blackColor,
+              size: 20,
+              color: whiteColor,
             ),
           ),
           const SizedBox(width: 5),
           CircleAvatar(
-            backgroundColor: whiteColor.withOpacity(.6),
+            backgroundColor: whiteColor.withOpacity(.3),
             child: const Icon(
-              Icons.shop,
-              size: 17,
-              color: blackColor,
+              Icons.shopping_cart,
+              size: 20,
+              color: whiteColor,
             ),
           ),
         ],
