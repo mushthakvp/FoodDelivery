@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/cart_screen/model/cart_screen.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
 import 'package:food_delivery/home_screen/view/widget/carousel_widget.dart';
 import 'package:food_delivery/home_screen/view/widget/fresh_fruit_items.dart';
 import 'package:food_delivery/home_screen/view/widget/herbs_items.dart';
+import 'package:food_delivery/routes/routes.dart';
+import 'widget/drawer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,28 +15,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scafoldColor,
-      drawer: Drawer(
-        child: Container(
-          color: blackColor,
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Row(
-                  children: const [
-                    CircleAvatar(
-                      backgroundColor: whiteColor,
-                      radius: 43,
-                      child: CircleAvatar(
-                        backgroundColor: blackColor,
-                        radius: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      drawer: const Drawer(
+        child: DrawerWidget(),
       ),
       appBar: AppBar(
         backgroundColor: blackColor,
@@ -48,12 +31,17 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 5),
-          CircleAvatar(
-            backgroundColor: whiteColor.withOpacity(.3),
-            child: const Icon(
-              Icons.shopping_cart,
-              size: 20,
-              color: whiteColor,
+          GestureDetector(
+            onTap: () {
+              Routes.push(screen: const CartScreen());
+            },
+            child: CircleAvatar(
+              backgroundColor: whiteColor.withOpacity(.3),
+              child: const Icon(
+                Icons.shopping_cart,
+                size: 20,
+                color: whiteColor,
+              ),
             ),
           ),
         ],
