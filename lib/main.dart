@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/home_screen/view/home_screen.dart';
+import 'package:food_delivery/home_screen/viewmodel/home_pov.dart';
 import 'package:food_delivery/routes/routes.dart';
 import 'package:food_delivery/sign_screen/viewmodel/auth_pov.dart';
 import 'package:food_delivery/splash_screen/viewmodel/splash_pov.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SplashPov>(create: (context) => SplashPov()),
         ChangeNotifierProvider<AuthPov>(create: (context) => AuthPov(FirebaseAuth.instance)),
+        ChangeNotifierProvider<HomePov>(create: (context) => HomePov()),
       ],
       child: MaterialApp(
         navigatorKey: Routes.navigatorKey,

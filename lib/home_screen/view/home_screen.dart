@@ -5,7 +5,9 @@ import 'package:food_delivery/core/styles/fonts.dart';
 import 'package:food_delivery/home_screen/view/widget/carousel_widget.dart';
 import 'package:food_delivery/home_screen/view/widget/fresh_fruit_items.dart';
 import 'package:food_delivery/home_screen/view/widget/herbs_items.dart';
+import 'package:food_delivery/home_screen/viewmodel/home_pov.dart';
 import 'package:food_delivery/routes/routes.dart';
+import 'package:provider/provider.dart';
 import 'widget/drawer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,6 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pov = context.read<HomePov>();
     return Scaffold(
       backgroundColor: scafoldColor,
       drawer: const Drawer(
