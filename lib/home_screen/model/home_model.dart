@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeProductModel {
-  String productName;
+  String productName;  
   String productImage;
   int productPrice;
   HomeProductModel({
