@@ -88,8 +88,8 @@ class HomeScreen extends StatelessWidget {
                         itemCount: value.herbsProduct.length,
                         itemBuilder: (context, index) {
                           final data = value.herbsProduct[index];
-                          
-                          return  FreshFruitItems(data : data);
+
+                          return FreshFruitItems(data: data);
                         },
                       )
                     : const Center(child: CircularProgressIndicator());
