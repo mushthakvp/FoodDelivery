@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/home_screen/model/home_model.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
 
 class FreshFruitItems extends StatelessWidget {
+  final HomeProductModel data;
   const FreshFruitItems({
-    Key? key,
+    Key? key, required this.data,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class FreshFruitItems extends StatelessWidget {
             flex: 2,
             child: Center(
               child: Image.network(
-                'https://purepng.com/public/uploads/large/purepng.com-pear-fruitspearorganicripehealthyfruit-981524676238afsvd.png',
+                data.productImage,
                 fit: BoxFit.cover,
               ),
             ),

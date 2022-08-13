@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/cart_screen/model/cart_screen.dart';
 import 'package:food_delivery/core/color/colors.dart';
@@ -56,24 +57,42 @@ class HomeScreen extends StatelessWidget {
           const ViewAllWidget(name: 'Herbs Seasonings'),
           LimitedBox(
             maxHeight: 220,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 30,
-              itemBuilder: (context, index) {
-                return const HerbsItems();
+            child: StreamBuilder(
+              stream: pov.dbObj.snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                return snapshot.hasData
+                    ? ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data?.docs.length,
+                        itemBuilder: (context, index) {
+                          final dataNew = snapshot.data!.docs[index];
+                          return HerbsItems(dataNew: dataNew);
+                        },
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      );
               },
             ),
           ),
           const ViewAllWidget(name: 'Fresh Fruits'),
           LimitedBox(
             maxHeight: 220,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 30,
-              itemBuilder: (context, index) {
-                return const FreshFruitItems();
+            child: Consumer<HomePov>(
+              builder: (context, value, child) {
+                return value.herbsProduct.isNotEmpty
+                    ? ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: value.herbsProduct.length,
+                        itemBuilder: (context, index) {
+                          final data = value.herbsProduct[index];
+                          
+                          return  FreshFruitItems(data : data);
+                        },
+                      )
+                    : const Center(child: CircularProgressIndicator());
               },
             ),
           ),

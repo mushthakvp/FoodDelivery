@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/styles/images.dart';
 import '../../../core/color/colors.dart';
@@ -6,8 +7,10 @@ import '../../../product_overview_screen/view/product_overview_screen.dart';
 import '../../../routes/routes.dart';
 
 class HerbsItems extends StatelessWidget {
+  final QueryDocumentSnapshot<Object?> dataNew;
   const HerbsItems({
     Key? key,
+    required this.dataNew,
   }) : super(key: key);
 
   @override
@@ -32,7 +35,7 @@ class HerbsItems extends StatelessWidget {
               flex: 2,
               child: Center(
                 child: Image.network(
-                  basil,
+                  dataNew['productImage'],
                   fit: BoxFit.cover,
                 ),
               ),
@@ -46,12 +49,12 @@ class HerbsItems extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Fresh Basil',
+                      dataNew['productName'],
                       style: gFontsOleo(
                         fw: FontWeight.bold,
                       ),
                     ),
-                    const Text('50\$/50 Gram'),
+                    Text('\$ ${dataNew['productPrice']} / 1KG'),
                     const SizedBox(
                       height: 5,
                     ),
