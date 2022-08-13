@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/home_screen/view/home_screen.dart';
 import 'package:food_delivery/home_screen/viewmodel/home_pov.dart';
 import 'package:food_delivery/routes/routes.dart';
+import 'package:food_delivery/search/viewmodel/search_pov.dart';
 import 'package:food_delivery/sign_screen/viewmodel/auth_pov.dart';
 import 'package:food_delivery/splash_screen/viewmodel/splash_pov.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SplashPov>(create: (context) => SplashPov()),
         ChangeNotifierProvider<AuthPov>(create: (context) => AuthPov(FirebaseAuth.instance)),
         ChangeNotifierProvider<HomePov>(create: (context) => HomePov()),
+        ChangeNotifierProvider<SearchScreenPov>(create: (context) => SearchScreenPov()),
       ],
       child: MaterialApp(
         navigatorKey: Routes.navigatorKey,
