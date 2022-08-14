@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/home_screen/view/home_screen.dart';
+import 'package:food_delivery/home_screen/viewmodel/carousel_image_pov.dart';
 import 'package:food_delivery/home_screen/viewmodel/home_pov.dart';
 import 'package:food_delivery/routes/routes.dart';
 import 'package:food_delivery/search/viewmodel/search_pov.dart';
@@ -26,14 +27,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AuthPov>(create: (context) => AuthPov(FirebaseAuth.instance)),
         ChangeNotifierProvider<HomePov>(create: (context) => HomePov()),
         ChangeNotifierProvider<SearchScreenPov>(create: (context) => SearchScreenPov()),
+        ChangeNotifierProvider<HomeCarouselPov>(create: (context) => HomeCarouselPov()),
       ],
       child: MaterialApp(
         navigatorKey: Routes.navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
         home: const HomeScreen(),
       ),
     );

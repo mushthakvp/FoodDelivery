@@ -6,7 +6,8 @@ import '../../../core/styles/fonts.dart';
 class FreshFruitItems extends StatelessWidget {
   final HomeProductModel data;
   const FreshFruitItems({
-    Key? key, required this.data,
+    Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -39,7 +40,7 @@ class FreshFruitItems extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Fresh Fruit',
+                    data.productName,
                     style: gFontsOleo(
                       fw: FontWeight.bold,
                     ),

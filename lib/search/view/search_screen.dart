@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +26,6 @@ class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
             decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Search...'),
             onChanged: (val) {
               setState(() {
-                log(val.toString());
                 name = val;
               });
             },
@@ -36,7 +33,7 @@ class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: (name != "") ? FirebaseFirestore.instance.collection('HerbsProduct').where('productName', isGreaterThanOrEqualTo: name.toLowerCase()).where('productName', isLessThan: '${name.toUpperCase()}z').where('productName', isGreaterThanOrEqualTo: name).where('productName', isLessThan: '${name}z').snapshots() : FirebaseFirestore.instance.collection("HerbsProduct").snapshots(),
+        stream: (name != "") ? FirebaseFirestore.instance.collection('HerbsProduct').where('productName', isGreaterThanOrEqualTo: name).where('productName', isLessThan: '${name}z').snapshots() : FirebaseFirestore.instance.collection("HerbsProduct").snapshots(),
         builder: (context, snapshot) {
           return (snapshot.connectionState == ConnectionState.waiting)
               ? const Center(child: CircularProgressIndicator())

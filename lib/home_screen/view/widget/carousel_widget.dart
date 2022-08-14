@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:food_delivery/home_screen/viewmodel/carousel_image_pov.dart';
+import 'package:provider/provider.dart';
 import '../../../core/color/colors.dart';
-import '../../../core/styles/fonts.dart';
 
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({
@@ -9,66 +10,24 @@ class CarouselWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      height: 180,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        image: const DecorationImage(
-          image: NetworkImage('https://t4.ftcdn.net/jpg/01/43/88/31/360_F_143883132_bn9n14k3aX10bq5HN18IYHPbx9YyiSEA.jpg'),
-          fit: BoxFit.cover,
-        ),
-        color: scafoldColor,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 50,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    color: whiteColor.withOpacity(.4),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(14),
-                      bottomRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(50),
-                    ),
+    return Consumer<HomeCarouselPov>(
+      builder: (context, value, child) {
+        return value.carouselList.isNotEmpty
+            ? Container(
+                margin: const EdgeInsets.all(10),
+                height: 160,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(value.carouselList.first.productImage),
+                    fit: BoxFit.cover,
                   ),
-                  child: const Center(
-                    child: Text('Veg'),
-                  ),
+                  color: scafoldColor,
+                  borderRadius: BorderRadius.circular(14),
                 ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '30 % off',
-                        style: gFontsOleo(
-                          cl: whiteColor,
-                          fw: FontWeight.bold,
-                          ls: 1,
-                          sz: 30,
-                        ),
-                      ),
-                      Text(
-                        'On all vegitables products',
-                        style: gFontsOleo(cl: whiteColor, sz: 20),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+              )
+            : const CupertinoActivityIndicator();
+      },
     );
   }
 }
