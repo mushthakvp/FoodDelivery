@@ -5,4 +5,5 @@ const secondaryColor = Color(0xFFffd018);
 const blackColor = Color(0xFF000000);
 const whiteColor = Color(0xFFFFFFFF);
 const greyColor = Color(0xFF9E9E9E);
-const scafoldColor =  Color(0xffcbcbcb);
+const scafoldColor = Color(0xFF0E0D0D);
+const transparentColor = Color(0x00000000);

@@ -19,6 +19,7 @@ dependencies:
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.1
   provider: ^6.0.3
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
