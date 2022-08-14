@@ -3,10 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class HomeProductModel {
   String productName;
   String productImage;
+  String productBackdrop;
   int productPrice;
   String productDetails;
   num productRating;
   HomeProductModel({
+    required this.productBackdrop,
     required this.productRating,
     required this.productName,
     required this.productImage,
@@ -21,6 +23,7 @@ class HomeProductModel {
       productImage: snapshot["productImage"],
       productPrice: snapshot["productPrice"],
       productDetails: snapshot["productDetails"],
+      productBackdrop: snapshot["productBackdrop"],
     );
   }
 

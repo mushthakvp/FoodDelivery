@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
+import 'package:food_delivery/home_screen/model/home_model.dart';
 import '../viewmodel/product_overview_pov.dart';
 import 'widget/bottom_bar.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
-  final String image;
-  const ProductOverviewScreen({Key? key, required this.image}) : super(key: key);
+  final HomeProductModel data;
+  const ProductOverviewScreen({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +32,17 @@ class ProductOverviewScreen extends StatelessWidget {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 30),
-            height: size.width,
-            width: size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(image)),
+          Hero(
+            tag: data.productImage,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              height: size.width,
+              width: size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(data.productImage),
+                ),
+              ),
             ),
           ),
           Padding(
@@ -44,7 +50,10 @@ class ProductOverviewScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Fresh Basil', style: gFontsOleo(sz: 25)),
+                Text(
+                  'Fresh Basil',
+                  style: gFontsOleo(sz: 25),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
