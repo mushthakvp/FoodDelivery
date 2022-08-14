@@ -5,5 +5,6 @@ const secondaryColor = Color(0xFFffd018);
 const blackColor = Color(0xFF000000);
 const whiteColor = Color(0xFFFFFFFF);
 const greyColor = Color(0xFF9E9E9E);
-const scafoldColor = Color(0xFF0E0D0D);
+const scafoldColor = Color(0xFF0e0e0e);
+const cardColor = Color(0xFF141414);
 const transparentColor = Color(0x00000000);
