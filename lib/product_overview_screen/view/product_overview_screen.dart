@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
-import '../viewmodel/product_overview_pov.dart';
 import 'widget/bottom_bar.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
@@ -15,17 +14,18 @@ class ProductOverviewScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: scafoldColor,
       appBar: AppBar(
-        backgroundColor: blackColor,
+        elevation: 0,
+        backgroundColor: scafoldColor,
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(
-              Icons.share,
-            ),
+            icon: const Icon(Icons.share),
+            splashRadius: 26,
           ),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.shopping_cart),
+            splashRadius: 26,
           ),
         ],
       ),
@@ -35,57 +35,48 @@ class ProductOverviewScreen extends StatelessWidget {
           Hero(
             tag: data.productImage,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30),
-              height: size.width,
-              width: size.width,
+              height: 200,
+              width: 250,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(data.productImage),
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          Container(
+            width: size.width,
+            height: size.height,
+            decoration: const BoxDecoration(
+              color: cardColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Fresh Basil',
-                  style: gFontsOleo(sz: 25),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('\$50 MRP', style: gFontsOleo(sz: 20)),
-                    Text('50 KG left in Stock', style: gFontsOleo(sz: 20)),
-                  ],
-                ),
-                LimitedBox(
-                  maxHeight: 60,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: ProductOverviewPov.quantity.length,
-                    itemBuilder: (context, index) {
-                      final data = ProductOverviewPov.quantity[index];
-                      return ItemQuantity(data: data);
-                    },
+                const SizedBox(height: 8),
+                const SizedBox(width: 40, child: Divider(color: whiteColor, thickness: 2)),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    data.productName,
+                    textAlign: TextAlign.center,
+                    style: gFontsOleo(cl: whiteColor, sz: 25, fw: FontWeight.bold),
                   ),
                 ),
-                Text(
-                  'Description',
-                  style: gFontsOleo(sz: 20, cl: greyColor),
-                ),
-                Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.", style: gFontsOleo(sz: 16)),
+                
               ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: Row(
-        children: const [
-          BottomWidget(
+        children: [
+          const BottomWidget(
             iconColor: whiteColor,
             icon: Icons.favorite_outline,
             color: whiteColor,
@@ -97,7 +88,7 @@ class ProductOverviewScreen extends StatelessWidget {
             icon: Icons.shopping_bag_outlined,
             color: blackColor,
             title: 'Buy now',
-            backGroundColor: whiteColor,
+            backGroundColor: whiteColor.withOpacity(.9),
           ),
         ],
       ),

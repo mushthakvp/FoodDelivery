@@ -22,11 +22,11 @@ class HomeScreenItemsCard extends StatelessWidget {
           children: [
             Container(
               height: 230,
-              width: 210,
+              width: 205,
               margin: const EdgeInsets.all(6),
               padding: const EdgeInsets.only(bottom: 16),
               decoration: BoxDecoration(
-                color: whiteColor.withOpacity(.1),
+                color: cardColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Column(
