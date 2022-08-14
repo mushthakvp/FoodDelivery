@@ -8,6 +8,7 @@ import 'package:food_delivery/home_screen/view/widget/fresh_fruit_items.dart';
 import 'package:food_delivery/home_screen/view/widget/herbs_items.dart';
 import 'package:food_delivery/home_screen/viewmodel/home_pov.dart';
 import 'package:food_delivery/routes/routes.dart';
+import 'package:food_delivery/search/view/search_screen.dart';
 import 'package:provider/provider.dart';
 import 'widget/drawer_widget.dart';
 
@@ -26,12 +27,17 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: blackColor,
         title: const Text('Home'),
         actions: [
-          CircleAvatar(
-            backgroundColor: whiteColor.withOpacity(.3),
-            child: const Icon(
-              Icons.search,
-              size: 20,
-              color: whiteColor,
+          GestureDetector(
+            onTap: () {
+              Routes.push(screen: const CloudFirestoreSearch());
+            },
+            child: CircleAvatar(
+              backgroundColor: whiteColor.withOpacity(.3),
+              child: const Icon(
+                Icons.search,
+                size: 20,
+                color: whiteColor,
+              ),
             ),
           ),
           const SizedBox(width: 5),
