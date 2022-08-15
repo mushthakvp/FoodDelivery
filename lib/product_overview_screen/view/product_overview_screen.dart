@@ -69,8 +69,23 @@ class ProductOverviewScreen extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  children: [
-                    
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    InfoWidget(
+                      icon: Icons.schedule,
+                      info: 'Cooking',
+                      time: '40 Minute',
+                    ),
+                    InfoWidget(
+                      icon: Icons.star,
+                      info: '4.08',
+                      time: 'Ratings',
+                    ),
+                    InfoWidget(
+                      icon: Icons.pending,
+                      info: 'Cooking',
+                      time: '40 Minute',
+                    ),
                   ],
                 )
               ],
@@ -89,13 +104,54 @@ class ProductOverviewScreen extends StatelessWidget {
           ),
           BottomWidget(
             iconColor: blackColor,
-            icon: Icons.shopping_bag_outlined,
+            icon: Icons.room_service,
             color: blackColor,
             title: 'Buy now',
             backGroundColor: whiteColor.withOpacity(.9),
           ),
         ],
       ),
+    );
+  }
+}
+
+class InfoWidget extends StatelessWidget {
+  const InfoWidget({
+    Key? key,
+    required this.icon,
+    required this.info,
+    required this.time,
+  }) : super(key: key);
+  final String time;
+  final IconData icon;
+  final String info;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 15),
+        Icon(
+          (icon),
+          color: primaryColor,
+          size: 25,
+        ),
+        const SizedBox(height: 10),
+        Text(
+          time,
+          style: gFontsOleo(
+            cl: whiteColor.withOpacity(.7),
+            sz: 14,
+          ),
+        ),
+        Text(
+          info,
+          style: gFontsOleo(
+            cl: greyColor,
+            sz: 12,
+          ),
+        )
+      ],
     );
   }
 }
