@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
+import 'package:food_delivery/core/styles/images.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
+import 'widget/all_info_widget.dart';
 import 'widget/bottom_bar.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
@@ -57,36 +59,50 @@ class ProductOverviewScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 8),
-                const SizedBox(width: 40, child: Divider(color: whiteColor, thickness: 2)),
-                const SizedBox(height: 20),
+                AllInfoWidget(data: data),
+                const SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    data.productName,
-                    textAlign: TextAlign.center,
-                    style: gFontsOleo(cl: whiteColor, sz: 25, fw: FontWeight.bold),
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 70,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage(sauseImage),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Sauce',
+                        style: gFontsOleo(cl: whiteColor, sz: 20),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          '₹ 10',
+                          style: gFontsOleo(
+                            cl: whiteColor,
+                          ),
+                        ),
+                      ),
+                      const CircleAvatar(
+                        radius: 20,
+                        backgroundColor: scafoldColor,
+                        child: Center(
+                          child: Icon(
+                            Icons.add,
+                            color: whiteColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                    ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    InfoWidget(
-                      icon: Icons.schedule,
-                      info: 'Cooking',
-                      time: '40 Minute',
-                    ),
-                    InfoWidget(
-                      icon: Icons.star,
-                      info: '4.08',
-                      time: 'Ratings',
-                    ),
-                    InfoWidget(
-                      icon: Icons.pending,
-                      info: 'Cooking',
-                      time: '40 Minute',
-                    ),
-                  ],
                 )
               ],
             ),
@@ -110,77 +126,6 @@ class ProductOverviewScreen extends StatelessWidget {
             backGroundColor: whiteColor.withOpacity(.9),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class InfoWidget extends StatelessWidget {
-  const InfoWidget({
-    Key? key,
-    required this.icon,
-    required this.info,
-    required this.time,
-  }) : super(key: key);
-  final String time;
-  final IconData icon;
-  final String info;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 15),
-        Icon(
-          (icon),
-          color: primaryColor,
-          size: 25,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          time,
-          style: gFontsOleo(
-            cl: whiteColor.withOpacity(.7),
-            sz: 14,
-          ),
-        ),
-        Text(
-          info,
-          style: gFontsOleo(
-            cl: greyColor,
-            sz: 12,
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class ItemQuantity extends StatelessWidget {
-  final dynamic data;
-  const ItemQuantity({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 10, top: 5, bottom: 5),
-      padding: const EdgeInsets.all(6),
-      height: 50,
-      width: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: blackColor),
-      ),
-      child: Center(
-        child: FittedBox(
-          child: Text(
-            data,
-            style: gFontsOleo(sz: 12),
-          ),
-        ),
       ),
     );
   }
