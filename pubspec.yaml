@@ -22,6 +22,7 @@ dependencies:
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.1
   provider: ^6.0.3
+  awesome_snackbar_content: ^0.0.8
 
 dev_dependencies:
   flutter_lints: ^2.0.0

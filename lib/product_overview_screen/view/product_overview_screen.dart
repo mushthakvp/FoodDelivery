@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
-import 'package:food_delivery/core/styles/fonts.dart';
-import 'package:food_delivery/core/styles/images.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
+import 'widget/addon_widget.dart';
 import 'widget/all_info_widget.dart';
 import 'widget/bottom_bar.dart';
 
@@ -61,49 +60,7 @@ class ProductOverviewScreen extends StatelessWidget {
               children: [
                 AllInfoWidget(data: data),
                 const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 70,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: AssetImage(sauseImage),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        'Sauce',
-                        style: gFontsOleo(cl: whiteColor, sz: 20),
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          '₹ 10',
-                          style: gFontsOleo(
-                            cl: whiteColor,
-                          ),
-                        ),
-                      ),
-                      const CircleAvatar(
-                        radius: 20,
-                        backgroundColor: scafoldColor,
-                        child: Center(
-                          child: Icon(
-                            Icons.add,
-                            color: whiteColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 14),
-                    ],
-                  ),
-                )
+                const AddOnWidget(),
               ],
             ),
           ),

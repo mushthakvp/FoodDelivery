@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_delivery/product_overview_screen/viewmodel/addon_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
 import '../../../home_screen/model/home_model.dart';
@@ -15,6 +17,7 @@ class AllInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pov = context.read<AddOnProductPov>();
     return Column(
       children: [
         const SizedBox(height: 8),
@@ -26,6 +29,59 @@ class AllInfoWidget extends StatelessWidget {
             data.productName,
             textAlign: TextAlign.center,
             style: gFontsOleo(cl: whiteColor, sz: 25, fw: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+          child: Row(
+            children: [
+              Text(
+                'MRP',
+                style: gFontsOleo(cl: whiteColor, sz: 18),
+              ),
+              const SizedBox(width: 10),
+              Visibility(
+                visible: data.productPrice == data.productOffer ? false : true,
+                child: Text(
+                  '₹ ${data.productOffer}  ',
+                  style: gFontsOleo(
+                    fw: FontWeight.bold,
+                    cl: whiteColor,
+                    sz: 18,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 5),
+              Text(
+                '₹ ${data.productPrice}',
+                style: data.productPrice != data.productOffer
+                    ? gFontsOleo(
+                        td: TextDecoration.lineThrough,
+                        cl: greyColor,
+                        sz: 18,
+                        dcCl: blackColor,
+                      )
+                    : gFontsOleo(
+                        cl: whiteColor,
+                        sz: 18,
+                      ),
+              ),
+              const SizedBox(width: 14),
+              Visibility(
+                visible: data.productPrice == data.productOffer ? false : true,
+                child: Text(
+                  '${pov.offerCalculating(
+                    offerPrice: data.productOffer.toDouble(),
+                    amount: data.productPrice.toDouble(),
+                  )} %',
+                  style: gFontsOleo(
+                    fw: FontWeight.bold,
+                    cl: greenColor,
+                    sz: 18,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Row(
@@ -70,8 +126,8 @@ class AllInfoWidget extends StatelessWidget {
             ),
             const InfoWidget(
               icon: FontAwesomeIcons.fire,
-              info: 'Cooking',
-              time: '40 Minute',
+              info: 'Recommended',
+              time: 'Top rated',
             ),
           ],
         )
