@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:food_delivery/home_screen/view/widget/satar_rating_widget.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
 import '../../model/home_model.dart';
@@ -9,7 +9,6 @@ class HomeScreenItemsCard extends StatelessWidget {
     Key? key,
     required this.data,
   }) : super(key: key);
-
   final HomeProductModel data;
 
   @override
@@ -46,21 +45,7 @@ class HomeScreenItemsCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  RatingBar.builder(
-                    itemSize: 20,
-                    initialRating: data.productRating.toDouble(),
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
-                    ignoreGestures: true,
-                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    itemBuilder: (context, _) => const Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {},
-                  ),
+                  StarRatingWidget(data: data),
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -102,7 +87,7 @@ class HomeScreenItemsCard extends StatelessWidget {
                 right: 0.0,
                 child: Center(
                   child: Hero(
-                    tag: data.productImage,
+                    tag: data.productName,
                     child: Container(
                       height: 110,
                       width: 110,

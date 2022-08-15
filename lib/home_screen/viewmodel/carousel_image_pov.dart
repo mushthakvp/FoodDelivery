@@ -4,12 +4,21 @@ import '../model/carousel_model.dart';
 
 class HomeCarouselPov extends ChangeNotifier {
   HomeCarouselPov() {
-    getAllLists();
+    nonVegPiza();
+    vegetarianPiza();
   }
 
   List<HomeCarouselModel> carouselList = [];
 
-  getAllLists() async {
+  nonVegPiza() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("BackgroundImage").get();
+    final list = snapshot.docs.map((docSnapshot) => HomeCarouselModel.fromSnapshot(docSnapshot)).toList();
+    carouselList.addAll(list);
+    carouselList.shuffle();
+    notifyListeners();
+  }
+
+  vegetarianPiza() async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("BackgroundImage").get();
     final list = snapshot.docs.map((docSnapshot) => HomeCarouselModel.fromSnapshot(docSnapshot)).toList();
     carouselList.addAll(list);

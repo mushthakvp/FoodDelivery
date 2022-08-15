@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
-import 'package:food_delivery/home_screen/viewmodel/home_pov.dart';
-import 'package:food_delivery/product_overview_screen/view/product_overview_screen.dart';
-import 'package:food_delivery/routes/routes.dart';
-import 'package:provider/provider.dart';
+import 'package:food_delivery/core/styles/fonts.dart';
+import 'package:food_delivery/home_screen/view/widget/non_veg_piza_widget.dart';
 import 'widget/carousel_widget.dart';
-import 'widget/home_screenitems.dart';
 import 'widget/view_all_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +14,10 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: scafoldColor,
       appBar: AppBar(
         backgroundColor: cardColor,
-        title: const Text('Pizza Pedler'),
+        title: Text(
+          'Pizza Pedler',
+          style: gFontsOleo(cl: whiteColor, sz: 20, fw: FontWeight.w500, ls: 1),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -33,36 +33,13 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
-        children: [
-          const Carouselwidget(),
-          const ViewAllWidget(name: 'Pizza Mania'),
-          const SizedBox(
-            height: 20,
-          ),
-          LimitedBox(
-            maxHeight: 270,
-            child: Consumer<HomePov>(builder: (context, value, _) {
-              return value.herbsProduct.isNotEmpty
-                  ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: value.herbsProduct.length,
-                      itemBuilder: (context, index) {
-                        final data = value.herbsProduct[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Routes.push(
-                              screen: ProductOverviewScreen(data: data),
-                            );
-                          },
-                          child: HomeScreenItemsCard(data: data),
-                        );
-                      })
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    );
-            }),
-          )
+        children: const [
+          Carouselwidget(),
+          ViewAllWidget(name: 'Non - Veg Pizza'),
+          SizedBox(height: 10),
+          NonVegPizaWidget(),
+          ViewAllWidget(name: 'Vegetarian Pizza'),
+          SizedBox(height: 10),
         ],
       ),
     );

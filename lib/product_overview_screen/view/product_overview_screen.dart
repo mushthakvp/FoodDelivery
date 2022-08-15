@@ -33,13 +33,13 @@ class ProductOverviewScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           Hero(
-            tag: data.productImage,
+            tag: data.productName,
             child: Container(
               height: 200,
               width: 250,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(data.productImage),
+                  image: NetworkImage(data.productBackdrop),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -68,7 +68,11 @@ class ProductOverviewScreen extends StatelessWidget {
                     style: gFontsOleo(cl: whiteColor, sz: 25, fw: FontWeight.bold),
                   ),
                 ),
-                
+                Row(
+                  children: [
+                    
+                  ],
+                )
               ],
             ),
           ),
