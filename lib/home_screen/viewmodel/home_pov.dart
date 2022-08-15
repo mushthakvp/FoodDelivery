@@ -15,7 +15,7 @@ class HomePov extends ChangeNotifier {
   getAllLists() async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("PizzaMania").get();
     final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
-    herbsProduct.addAll(list);
+    herbsProduct.addAll(list.reversed);
     notifyListeners();
   }
 
