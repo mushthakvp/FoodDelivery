@@ -60,7 +60,7 @@ class ProductOverviewScreen extends StatelessWidget {
               children: [
                 AllInfoWidget(data: data),
                 const SizedBox(height: 10),
-                const AddOnWidget(),
+                 AddOnWidget(data : data),
               ],
             ),
           ),
