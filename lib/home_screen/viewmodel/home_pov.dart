@@ -5,17 +5,26 @@ import 'package:food_delivery/home_screen/model/home_model.dart';
 class HomePov extends ChangeNotifier {
   final dbObj = FirebaseFirestore.instance.collection('HerbsProduct');
   HomePov() {
-    getAllLists();
+    vegPizaList();
+    nonVegPizaList();
     //  withoutModelClass();
   }
+  List<HomeProductModel> vegPiza = [];
+  List<HomeProductModel> nonVegPiza = [];
 
-  List<HomeProductModel> herbsProduct = [];
-  List<HomeProductModel> freshProduct = [];
-
-  getAllLists() async {
-    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("PizzaMania").get();
+  nonVegPizaList() async {
+    nonVegPiza.clear();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("nonVegPizza").get();
     final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
-    herbsProduct.addAll(list.reversed);
+    nonVegPiza.addAll(list.reversed);
+    notifyListeners();
+  }
+
+  vegPizaList() async {
+    vegPiza.clear();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("vegPiza").get();
+    final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
+    vegPiza.addAll(list.reversed);
     notifyListeners();
   }
 

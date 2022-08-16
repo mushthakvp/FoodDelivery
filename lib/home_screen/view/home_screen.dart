@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
+import 'package:food_delivery/favourite_screen/view/favourite_screen.dart';
 import 'package:food_delivery/home_screen/view/widget/non_veg_piza_widget.dart';
+import 'package:food_delivery/routes/routes.dart';
 import 'widget/carousel_widget.dart';
+import 'widget/veg_piza_widget.dart';
 import 'widget/view_all_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,12 +25,19 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.location_on_outlined),
-            splashRadius: 30,
+            splashRadius: 25,
           ),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.search),
-            splashRadius: 30,
+            splashRadius: 25,
+          ),
+          IconButton(
+            onPressed: () {
+              Routes.push(screen: const FavouriteScreen());
+            },
+            icon: const Icon(Icons.favorite_outline),
+            splashRadius: 25,
           ),
         ],
       ),
@@ -40,6 +50,7 @@ class HomeScreen extends StatelessWidget {
           NonVegPizaWidget(),
           ViewAllWidget(name: 'Vegetarian Pizza'),
           SizedBox(height: 10),
+          VegPizaWidget(),
         ],
       ),
     );

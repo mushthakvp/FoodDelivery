@@ -20,8 +20,8 @@ class HomeScreenItemsCard extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Container(
-              height: 230,
-              width: 205,
+              height: 185,
+              width: 180,
               margin: const EdgeInsets.all(6),
               padding: const EdgeInsets.only(bottom: 16),
               decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class HomeScreenItemsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       data.productName,
                       maxLines: 2,
@@ -44,7 +44,6 @@ class HomeScreenItemsCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
                   StarRatingWidget(data: data),
                   const SizedBox(height: 8),
                   Row(
