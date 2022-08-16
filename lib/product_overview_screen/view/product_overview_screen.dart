@@ -16,7 +16,7 @@ class ProductOverviewScreen extends StatelessWidget {
       backgroundColor: scafoldColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: scafoldColor,
+        backgroundColor: transparentColor,
         actions: [
           IconButton(
             onPressed: () {},
@@ -48,7 +48,6 @@ class ProductOverviewScreen extends StatelessWidget {
           ),
           Container(
             width: size.width,
-            height: size.height,
             decoration: const BoxDecoration(
               color: cardColor,
               borderRadius: BorderRadius.only(
@@ -60,7 +59,7 @@ class ProductOverviewScreen extends StatelessWidget {
               children: [
                 AllInfoWidget(data: data),
                 const SizedBox(height: 10),
-                 AddOnWidget(data : data),
+                AddOnWidget(data: data),
               ],
             ),
           ),

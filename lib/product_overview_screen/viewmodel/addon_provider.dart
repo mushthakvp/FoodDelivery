@@ -24,7 +24,6 @@ class AddOnProductPov extends ChangeNotifier {
     behavior: SnackBarBehavior.floating,
     backgroundColor: Colors.transparent,
     content: AwesomeSnackbarContent(
-      color: scafoldColor,
       title: 'Add on',
       message: 'One sauce added to your plate',
       contentType: ContentType.success,

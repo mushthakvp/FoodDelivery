@@ -41,7 +41,7 @@ class AllInfoWidget extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Visibility(
-                visible: data.productPrice == data.productOffer ? false : true,
+                visible: data.productPrice <= data.productOffer ? false : true,
                 child: Text(
                   '₹ ${data.productOffer}  ',
                   style: gFontsOleo(
@@ -68,7 +68,7 @@ class AllInfoWidget extends StatelessWidget {
               ),
               const SizedBox(width: 14),
               Visibility(
-                visible: data.productPrice == data.productOffer ? false : true,
+                visible: data.productPrice <= data.productOffer ? false : true,
                 child: Text(
                   '${pov.offerCalculating(
                     offerPrice: data.productOffer.toDouble(),

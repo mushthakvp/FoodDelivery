@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HomeProductModel {
+class FavouriteModel {
   String productName;
   String productImage;
   String productBackdrop;
@@ -9,7 +9,7 @@ class HomeProductModel {
   String productShop;
   num productOffer;
   num productRating;
-  HomeProductModel({
+  FavouriteModel({
     required this.productPrice,
     required this.productOffer,
     required this.productRating,
@@ -20,8 +20,8 @@ class HomeProductModel {
     required this.productShop,
   });
 
-  factory HomeProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    return HomeProductModel(
+  factory FavouriteModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    return FavouriteModel(
       productShop: snapshot["productShop"],
       productName: snapshot["productName"],
       productOffer: snapshot["productOffer"],

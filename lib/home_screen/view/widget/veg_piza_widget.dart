@@ -6,8 +6,8 @@ import '../../../product_overview_screen/view/product_overview_screen.dart';
 import '../../../routes/routes.dart';
 import '../../viewmodel/home_pov.dart';
 
-class NonVegPizaWidget extends StatelessWidget {
-  const NonVegPizaWidget({
+class VegPizaWidget extends StatelessWidget {
+  const VegPizaWidget({
     Key? key,
   }) : super(key: key);
 
@@ -17,13 +17,13 @@ class NonVegPizaWidget extends StatelessWidget {
     return LimitedBox(
       maxHeight: 252,
       child: Consumer<HomePov>(builder: (context, value, _) {
-        return value.nonVegPiza.isNotEmpty
+        return value.vegPiza.isNotEmpty
             ? ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: value.nonVegPiza.length,
+                itemCount: value.vegPiza.length,
                 itemBuilder: (context, index) {
-                  final data = value.nonVegPiza[index];
+                  final data = value.vegPiza[index];
                   return GestureDetector(
                     onTap: () {
                       pov.buttonColorChange(false, context);
