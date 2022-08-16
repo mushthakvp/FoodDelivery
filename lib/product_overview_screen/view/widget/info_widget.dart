@@ -20,7 +20,7 @@ class InfoWidget extends StatelessWidget {
         const SizedBox(height: 15),
         Icon(
           (icon),
-          color: primaryColor,
+          color: yellowColor,
           size: 20,
         ),
         const SizedBox(height: 10),

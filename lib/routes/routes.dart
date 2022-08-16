@@ -10,4 +10,12 @@ class Routes {
       ),
     );
   }
+
+  static pushreplace({required var screen}) {
+    navigatorKey.currentState?.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => screen,
+      ),
+    );
+  }
 }

@@ -20,6 +20,11 @@ class ProductOverviewScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
+            icon: const Icon(Icons.favorite_outline),
+            splashRadius: 26,
+          ),
+          IconButton(
+            onPressed: () {},
             icon: const Icon(Icons.share),
             splashRadius: 26,
           ),

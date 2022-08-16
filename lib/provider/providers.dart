@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery/main.dart';
 import 'package:provider/provider.dart';
+import '../favourite_screen/viewmodel/favourite_pov.dart';
 import '../home_screen/viewmodel/carousel_image_pov.dart';
 import '../home_screen/viewmodel/home_pov.dart';
 import '../product_overview_screen/viewmodel/addon_provider.dart';
@@ -19,6 +20,7 @@ class Providers {
         ChangeNotifierProvider<SearchScreenPov>(create: (context) => SearchScreenPov()),
         ChangeNotifierProvider<HomeCarouselPov>(create: (context) => HomeCarouselPov()),
         ChangeNotifierProvider<AddOnProductPov>(create: (context) => AddOnProductPov()),
+        ChangeNotifierProvider<FavouritePov>(create: (context) => FavouritePov()),
       ],
       child: const MyApp(),
     );

@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery/home_screen/view/home_screen.dart';
 import 'package:food_delivery/provider/providers.dart';
 import 'package:food_delivery/routes/routes.dart';
+import 'package:food_delivery/splash_screen/view/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: Routes.navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

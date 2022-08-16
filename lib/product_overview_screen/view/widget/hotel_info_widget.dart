@@ -33,7 +33,7 @@ class HotelInfoWidget extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20,
-                backgroundColor: primaryColor.withOpacity(.1),
+                backgroundColor: yellowColor.withOpacity(.1),
                 child: const Center(
                   child: Icon(
                     Icons.store,
@@ -55,7 +55,7 @@ class HotelInfoWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: primaryColor.withOpacity(.1),
+                    color: yellowColor.withOpacity(.1),
                   ),
                 ),
                 child: Center(
@@ -79,7 +79,7 @@ class HotelInfoWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: primaryColor.withOpacity(.1),
+                            color: yellowColor.withOpacity(.1),
                           ),
                           borderRadius: BorderRadius.circular(30)),
                       child: Row(
@@ -91,7 +91,7 @@ class HotelInfoWidget extends StatelessWidget {
                           const SizedBox(width: 6),
                           const Icon(
                             Icons.star,
-                            color: primaryColor,
+                            color: yellowColor,
                             size: 16,
                           )
                         ],
