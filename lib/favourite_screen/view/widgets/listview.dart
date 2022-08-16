@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/home_screen/view/widget/satar_rating_widget.dart';
+import 'package:food_delivery/favourite_screen/model/favourite_model.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
-import '../../model/home_model.dart';
+import 'favorite_ratings.dart';
 
-class HomeScreenItemsCard extends StatelessWidget {
-  const HomeScreenItemsCard({
+class FavouriteListView extends StatelessWidget {
+  const FavouriteListView({
     Key? key,
     required this.data,
   }) : super(key: key);
-  final HomeProductModel data;
-  
+  final FavouriteModel data;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class HomeScreenItemsCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  StarRatingWidget(data: data),
+                  FavouriteRatingWidget(data: data),
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

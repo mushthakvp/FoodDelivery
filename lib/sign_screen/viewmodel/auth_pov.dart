@@ -25,7 +25,7 @@ class AuthPov extends ChangeNotifier {
         ),
       );
 
-      Routes.push(screen: const HomeScreen());
+      Routes.pushreplace(screen: const HomeScreen());
 
       return Future.value('');
     } on FirebaseAuthException catch (ex) {

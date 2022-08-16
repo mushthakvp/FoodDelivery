@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
@@ -7,25 +8,32 @@ class HomePov extends ChangeNotifier {
   HomePov() {
     vegPizaList();
     nonVegPizaList();
-    //  withoutModelClass();
   }
   List<HomeProductModel> vegPiza = [];
   List<HomeProductModel> nonVegPiza = [];
 
-  nonVegPizaList() async {
+  void nonVegPizaList() async {
     nonVegPiza.clear();
     QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("nonVegPizza").get();
     final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
     nonVegPiza.addAll(list.reversed);
     notifyListeners();
+    refreshDataBase();
   }
 
-  vegPizaList() async {
+  void vegPizaList() async {
     vegPiza.clear();
     QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("vegPiza").get();
     final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
     vegPiza.addAll(list.reversed);
     notifyListeners();
+  }
+
+  void refreshDataBase() {
+    Timer.periodic(const Duration(minutes: 1), (timer) {
+      vegPizaList();
+      nonVegPizaList();
+    });
   }
 
   // withoutModelClass() async {
