@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class HomeProductModel {
   String productName;
   String productImage;
@@ -20,7 +18,7 @@ class HomeProductModel {
     required this.productShop,
   });
 
-  factory HomeProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+  factory HomeProductModel.fromSnapshot(Map<String, dynamic> snapshot) {
     return HomeProductModel(
       productShop: snapshot["productShop"],
       productName: snapshot["productName"],

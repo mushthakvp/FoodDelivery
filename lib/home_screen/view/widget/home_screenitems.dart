@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/home_screen/view/widget/satar_rating_widget.dart';
 import '../../../core/color/colors.dart';
@@ -10,7 +11,6 @@ class HomeScreenItemsCard extends StatelessWidget {
     required this.data,
   }) : super(key: key);
   final HomeProductModel data;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -81,27 +81,28 @@ class HomeScreenItemsCard extends StatelessWidget {
               ),
             ),
             Positioned(
-                top: -210,
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Center(
-                  child: Hero(
-                    tag: data.productName,
-                    child: Container(
-                      height: 110,
-                      width: 110,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(data.productImage),
-                          fit: BoxFit.cover,
-                        ),
-                        color: scafoldColor,
-                        shape: BoxShape.circle,
+              top: -210,
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: Center(
+                child: Hero(
+                  tag: data.productName,
+                  child: Container(
+                    height: 110,
+                    width: 110,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(data.productImage),
+                        fit: BoxFit.cover,
                       ),
+                      color: scafoldColor,
+                      shape: BoxShape.circle,
                     ),
                   ),
-                ))
+                ),
+              ),
+            ),
           ],
         ),
       ],

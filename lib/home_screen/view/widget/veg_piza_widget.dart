@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/home_screen/view/widget/home_screenitems.dart';
 import 'package:food_delivery/product_overview_screen/viewmodel/addon_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../product_overview_screen/view/product_overview_screen.dart';
 import '../../../routes/routes.dart';
+import '../../model/home_model.dart';
 import '../../viewmodel/home_pov.dart';
 
 class VegPizaWidget extends StatelessWidget {
@@ -13,31 +15,36 @@ class VegPizaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pov = context.read<AddOnProductPov>();
+    final pov = context.read<HomePov>();
     return LimitedBox(
       maxHeight: 252,
-      child: Consumer<HomePov>(builder: (context, value, _) {
-        return value.vegPiza.isNotEmpty
-            ? ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: value.vegPiza.length,
-                itemBuilder: (context, index) {
-                  final data = value.vegPiza[index];
-                  return GestureDetector(
-                    onTap: () {
-                      pov.buttonColorChange(false, context);
-                      Routes.push(
-                        screen: ProductOverviewScreen(data: data),
-                      );
-                    },
-                    child: HomeScreenItemsCard(data: data),
-                  );
-                })
-            : const Center(
-                child: CircularProgressIndicator(),
-              );
-      }),
+      child: StreamBuilder(
+        stream: pov.vegCollection.snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+          List<HomeProductModel> list = pov.convertToList(streamSnapshot);
+          return streamSnapshot.hasData
+              ? ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    final data = list[index];
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<AddOnProductPov>().buttonColorChange(false, context);
+                        Routes.push(
+                          screen: ProductOverviewScreen(data: data),
+                        );
+                      },
+                      child: HomeScreenItemsCard(data: data),
+                    );
+                  },
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                );
+        },
+      ),
     );
   }
 }

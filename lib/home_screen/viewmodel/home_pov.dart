@@ -1,55 +1,21 @@
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
 
 class HomePov extends ChangeNotifier {
-  final dbObj = FirebaseFirestore.instance.collection('HerbsProduct');
-  HomePov() {
-    vegPizaList();
-    nonVegPizaList();
-  }
-  List<HomeProductModel> vegPiza = [];
-  List<HomeProductModel> nonVegPiza = [];
+  final nonVegCollection = FirebaseFirestore.instance.collection('nonVegPizza');
+  final vegCollection = FirebaseFirestore.instance.collection('vegPiza');
 
-  void nonVegPizaList() async {
-    nonVegPiza.clear();
-    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("nonVegPizza").get();
-    final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
-    nonVegPiza.addAll(list.reversed);
-    notifyListeners();
-    refreshDataBase();
-  }
+  List<HomeProductModel> convertToList(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      List<HomeProductModel> newlist = snapshot.data!.docs.map((convert) {
+        return HomeProductModel.fromSnapshot(convert.data() as Map<String, dynamic>);
+      }).toList();
 
-  void vegPizaList() async {
-    vegPiza.clear();
-    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("vegPiza").get();
-    final list = snapshot.docs.map((docSnapshot) => HomeProductModel.fromSnapshot(docSnapshot)).toList();
-    vegPiza.addAll(list.reversed);
-    notifyListeners();
+      newlist = newlist.reversed.toList();
+      return newlist;
+    } else {
+      return [];
+    }
   }
-
-  void refreshDataBase() {
-    Timer.periodic(const Duration(minutes: 1), (timer) {
-      vegPizaList();
-      nonVegPizaList();
-    });
-  }
-
-  // withoutModelClass() async {
-  //   freshProduct.clear();
-  //   QuerySnapshot snapshot = await FirebaseFirestore.instance.collection("HerbsProduct").get();
-  //   for (var element in snapshot.docs) {
-  //     final list = HomeProductModel(
-  //       productName: element.get('productName'),
-  //       productImage: element.get('productImage'),
-  //       productPrice: element.get('productPrice'),
-  //       productDetails: element.get('productDetails'),
-  //       productRating: element.get('productRating'),
-  //     );
-  //     freshProduct.add(list);
-  //   }
-  //   log(freshProduct.length.toString());
-  //   notifyListeners();
-  // }
 }

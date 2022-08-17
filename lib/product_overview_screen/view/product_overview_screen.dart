@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
@@ -45,7 +46,7 @@ class ProductOverviewScreen extends StatelessWidget {
               width: 250,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(data.productBackdrop),
+                  image: CachedNetworkImageProvider(data.productBackdrop),
                   fit: BoxFit.contain,
                 ),
               ),
