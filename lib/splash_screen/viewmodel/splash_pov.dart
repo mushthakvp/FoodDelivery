@@ -10,9 +10,12 @@ class SplashPov extends ChangeNotifier {
     checkUserLogin();
   }
 
+  static String email = 'mail@app.com';
+
   void checkUserLogin() async {
     final obj = await SharedPreferences.getInstance();
     bool data = obj.getBool('userLoged') ?? false;
+    email = obj.getString('userMail') ?? 'mail@app.com';
 
     Timer(
       const Duration(seconds: 2),

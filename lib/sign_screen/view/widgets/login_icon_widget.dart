@@ -59,7 +59,7 @@ class LoginAllIconWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  pov.googleSignin();
+                  pov.googleSignin(context);
                 },
                 child: const LoginIconWidgets(
                   backgroundColor: googleColor,

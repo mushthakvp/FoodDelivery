@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class FavouriteModel {
   String productName;
   String productImage;
@@ -20,7 +18,7 @@ class FavouriteModel {
     required this.productShop,
   });
 
-  factory FavouriteModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+  factory FavouriteModel.fromSnapshot(Map<String, dynamic> snapshot) {
     return FavouriteModel(
       productShop: snapshot["productShop"],
       productName: snapshot["productName"],
@@ -35,6 +33,7 @@ class FavouriteModel {
 
   Map<String, dynamic> toSnapshot() {
     return {
+      "productBackdrop": productBackdrop,
       "productShop": productShop,
       "productName": productName,
       "productOffer": productOffer,
