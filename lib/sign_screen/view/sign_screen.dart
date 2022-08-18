@@ -16,7 +16,7 @@ class SignScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: size.width / 4.5),
+            SizedBox(height: size.width / 6),
             Center(
               child: CircleAvatar(
                 backgroundColor: cardColor.withOpacity(.4),
@@ -24,11 +24,11 @@ class SignScreen extends StatelessWidget {
                 backgroundImage: const AssetImage('assets/images/BG1.png'),
               ),
             ),
-            SizedBox(height: size.width / 6),
+            SizedBox(height: size.width / 7),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 24),
               width: double.infinity,
-              height: size.width * 1.14,
+              height: size.width * 1.2,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: cardColor,
