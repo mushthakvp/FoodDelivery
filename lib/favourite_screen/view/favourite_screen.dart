@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
-import 'package:food_delivery/favourite_screen/viewmodel/favourite_pov.dart';
 import 'package:provider/provider.dart';
-
+import '../../home_screen/model/home_model.dart';
+import '../model/favourite_model.dart';
+import '../viewmodel/favourite_pov.dart';
 import 'widgets/listview.dart';
 
 class FavouriteScreen extends StatelessWidget {
@@ -11,7 +13,7 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final pov = context.read<FavouritePov>();    return Scaffold(
       backgroundColor: scafoldColor,
       appBar: AppBar(
         title: Text(
@@ -22,25 +24,24 @@ class FavouriteScreen extends StatelessWidget {
         backgroundColor: cardColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Consumer<FavouritePov>(builder: (context, value, _) {
-          return value.favouriteList.isNotEmpty
-              ? GridView.count(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 3,
-                  childAspectRatio: 1 / 1.5,
-                  children: List.generate(value.favouriteList.length, (index) {
-                    final data = value.favouriteList[index];
-                    return FavouriteListView(data: data);
-                  }),
-                )
-              : const Center(
-                  child: CircularProgressIndicator(),
-                );
-        }),
-      ),
+          padding: const EdgeInsets.all(8.0),
+          child: StreamBuilder(
+            stream: pov.vegCollection.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                 List<FavouriteModel> list = pov.convertToList(streamSnapshot);
+              return GridView.count(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                crossAxisSpacing: 3,
+                childAspectRatio: 1 / 1.5,
+                children: List.generate(list.length, (index) {
+                  final data = list[index];
+                  return FavouriteListView(data: data);
+                }),
+              );
+            }
+          )),
     );
   }
 }

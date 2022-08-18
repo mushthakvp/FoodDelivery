@@ -33,6 +33,7 @@ class HomeProductModel {
 
   Map<String, dynamic> toSnapshot() {
     return {
+      "productBackdrop": productBackdrop,
       "productShop": productShop,
       "productName": productName,
       "productOffer": productOffer,

@@ -15,8 +15,8 @@ class LoginInfiItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           children: [
@@ -84,7 +84,12 @@ class LoginInfiItemsWidget extends StatelessWidget {
             )
           ],
         ),
-        const LoginAllIconWidget(),
+        Column(
+          children: const [
+            LoginAllIconWidget(),
+            SizedBox(height: 8),
+          ],
+        ),
       ],
     );
   }

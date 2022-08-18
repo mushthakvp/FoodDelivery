@@ -1,19 +1,21 @@
-  import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:food_delivery/splash_screen/viewmodel/splash_pov.dart';
 import '../model/favourite_model.dart';
 
 class FavouritePov extends ChangeNotifier {
-  FavouritePov() {
-    nonVegPizaList();
-  }
+  final vegCollection = FirebaseFirestore.instance.collection('userDetails').doc(SplashPov.email).collection('whishList');
 
-  List<FavouriteModel> favouriteList = [];
+  List<FavouriteModel> convertToList(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      List<FavouriteModel> newlist = snapshot.data!.docs.map((convert) {
+        return FavouriteModel.fromSnapshot(convert.data() as Map<String, dynamic>);
+      }).toList();
 
-  nonVegPizaList() async {
-    favouriteList.clear();
-    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("nonVegPizza").get();
-    final list = snapshot.docs.map((docSnapshot) => FavouriteModel.fromSnapshot(docSnapshot)).toList();
-    favouriteList.addAll(list.reversed);
-    notifyListeners();
+      newlist = newlist.reversed.toList();
+      return newlist;
+    } else {
+      return [];
+    }
   }
 }

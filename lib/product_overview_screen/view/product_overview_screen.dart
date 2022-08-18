@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
+import 'package:provider/provider.dart';
+import '../viewmodel/product_overview_pov.dart';
 import 'widget/addon_widget.dart';
 import 'widget/all_info_widget.dart';
 import 'widget/bottom_bar.dart';
@@ -20,7 +22,9 @@ class ProductOverviewScreen extends StatelessWidget {
         backgroundColor: transparentColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<ProductOverviewPov>().addToWhishlist(data: data, context: context);
+            },
             icon: const Icon(Icons.favorite_outline),
             splashRadius: 26,
           ),
