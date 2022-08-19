@@ -1,18 +1,25 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:food_delivery/favourite_screen/model/favourite_model.dart';
+import 'package:provider/provider.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
+import '../../../home_screen/model/home_model.dart';
+import '../../viewmodel/favourite_pov.dart';
 import 'favorite_ratings.dart';
 
 class FavouriteListView extends StatelessWidget {
   const FavouriteListView({
     Key? key,
     required this.data,
+    required this.id,
   }) : super(key: key);
-  final FavouriteModel data;
+  final String id;
+  final HomeProductModel data;
 
   @override
   Widget build(BuildContext context) {
+    final pov = context.read<FavouritePov>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -20,10 +27,10 @@ class FavouriteListView extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Container(
-              height: 185,
-              width: 180,
+              height: 250,
+              width: 220,
               margin: const EdgeInsets.all(6),
-              padding: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(24),
@@ -40,7 +47,7 @@ class FavouriteListView extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: gFontsOleo(
                         cl: whiteColor,
-                        fw: FontWeight.w600,
+                        fw: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -75,29 +82,77 @@ class FavouriteListView extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            log('message');
+                            pov.deleteFavourite(id: id);
+                          },
+                          child: Container(
+                            height: 34,
+                            width: 34,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: greyColor.withOpacity(.2),
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.delete_outline,
+                              color: whiteColor,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                              margin: const EdgeInsets.only(left: 8),
+                              height: 34,
+                              width: 34,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: greyColor.withOpacity(.2),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Add To Bag',
+                                  style: gFontsOleo(cl: whiteColor),
+                                ),
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
             Positioned(
-                top: -210,
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Center(
-                  child: Container(
-                    height: 110,
-                    width: 110,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(data.productImage),
-                        fit: BoxFit.cover,
-                      ),
-                      color: scafoldColor,
-                      shape: BoxShape.circle,
+              top: -210,
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: Center(
+                child: Container(
+                  height: 90,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(data.productImage),
+                      fit: BoxFit.cover,
                     ),
+                    color: scafoldColor,
+                    shape: BoxShape.circle,
                   ),
-                ))
+                ),
+              ),
+            ),
           ],
         ),
       ],

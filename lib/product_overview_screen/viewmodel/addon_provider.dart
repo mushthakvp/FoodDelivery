@@ -23,6 +23,7 @@ class AddOnProductPov extends ChangeNotifier {
 
   favButtonChange({required bool favButton}) {
     this.favButton = favButton;
+    notifyListeners();
   }
 
   //snack bar
@@ -45,4 +46,7 @@ class AddOnProductPov extends ChangeNotifier {
     double percent = 100 - finalAmount;
     return percent.toStringAsFixed(2);
   }
+
+
+  
 }

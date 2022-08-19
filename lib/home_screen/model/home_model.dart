@@ -8,6 +8,7 @@ class HomeProductModel {
   num productOffer;
   num productRating;
   bool productAddedFavourite;
+  String productCategory;
   HomeProductModel({
     required this.productPrice,
     required this.productOffer,
@@ -18,10 +19,12 @@ class HomeProductModel {
     required this.productBackdrop,
     required this.productAddedFavourite,
     required this.productShop,
+    required this.productCategory,
   });
 
   factory HomeProductModel.fromSnapshot(Map<String, dynamic> snapshot) {
     return HomeProductModel(
+      productCategory: snapshot["productCategory"],
       productAddedFavourite: snapshot["productAddedFavourite"],
       productShop: snapshot["productShop"],
       productName: snapshot["productName"],
@@ -36,6 +39,7 @@ class HomeProductModel {
 
   Map<String, dynamic> toSnapshot() {
     return {
+      "productCategory": productCategory,
       "productAddedFavourite": productAddedFavourite,
       "productBackdrop": productBackdrop,
       "productShop": productShop,

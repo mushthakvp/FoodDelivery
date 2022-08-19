@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:food_delivery/favourite_screen/model/favourite_model.dart';
+import '../../../home_screen/model/home_model.dart';
 
 class FavouriteRatingWidget extends StatelessWidget {
   const FavouriteRatingWidget({
@@ -8,7 +8,7 @@ class FavouriteRatingWidget extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final FavouriteModel data;
+  final HomeProductModel data;
 
   @override
   Widget build(BuildContext context) {

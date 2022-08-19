@@ -16,6 +16,7 @@ class VegPizaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pov = context.read<HomePov>();
+    final pov2 = context.read<AddOnProductPov>();
     return LimitedBox(
       maxHeight: 252,
       child: StreamBuilder(
@@ -32,11 +33,11 @@ class VegPizaWidget extends StatelessWidget {
                     final data = list[index];
                     return GestureDetector(
                       onTap: () {
-                        context.read<AddOnProductPov>().buttonColorChange(false, context);
+                        pov2.buttonColorChange(false, context);
+                        pov2.favButtonChange(favButton: data.productAddedFavourite);
                         Routes.push(
                           screen: ProductOverviewScreen(
                             data: data,
-                            collection: 'vegPiza',
                             id: id.id,
                           ),
                         );
