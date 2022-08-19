@@ -7,6 +7,7 @@ class WhishListModel {
   String productShop;
   num productOffer;
   num productRating;
+  bool productAddedFavourite;
 
   WhishListModel({
     required this.productPrice,
@@ -16,11 +17,13 @@ class WhishListModel {
     required this.productDetails,
     required this.productImage,
     required this.productBackdrop,
+    required this.productAddedFavourite,
     required this.productShop,
   });
 
   Map<String, dynamic> toSnapshot() {
     return {
+      "productAddedFavourite": productAddedFavourite,
       "productShop": productShop,
       "productName": productName,
       "productOffer": productOffer,

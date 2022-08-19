@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery/routes/routes.dart';
 import 'package:food_delivery/sign_screen/model/usermodel.dart';
-import 'package:food_delivery/splash_screen/viewmodel/splash_pov.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../home_screen/view/home_screen.dart';
 
@@ -45,7 +43,7 @@ class AuthPov extends ChangeNotifier {
             );
       }
 
-      await saveUserData(mail: userDetails!.email.toString(), context: context);
+      await saveUserData();
 
       Routes.pushreplace(screen: const HomeScreen());
 
@@ -55,10 +53,8 @@ class AuthPov extends ChangeNotifier {
     }
   }
 
-  saveUserData({required String mail, required BuildContext context}) async {
-    SplashPov.email = mail;
+  saveUserData() async {
     final obj = await SharedPreferences.getInstance();
     obj.setBool('userLoged', true);
-    obj.setString('userMail', mail);
   }
 }

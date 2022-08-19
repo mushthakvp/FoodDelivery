@@ -17,6 +17,14 @@ class AddOnProductPov extends ChangeNotifier {
     notifyListeners();
   }
 
+  // favourite button
+
+  bool favButton = false;
+
+  favButtonChange({required bool favButton}) {
+    this.favButton = favButton;
+  }
+
   //snack bar
 
   var snackBar = SnackBar(

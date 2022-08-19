@@ -23,18 +23,25 @@ class NonVegPizaWidget extends StatelessWidget {
           stream: pov.nonVegCollection.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             List<HomeProductModel> list = pov.convertToList(streamSnapshot);
+
             return streamSnapshot.hasData
                 ? ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: list.length,
                     itemBuilder: (context, index) {
+                      final id = streamSnapshot.data!.docs[index];
                       final data = list[index];
+
                       return GestureDetector(
                         onTap: () {
                           context.read<AddOnProductPov>().buttonColorChange(false, context);
                           Routes.push(
-                            screen: ProductOverviewScreen(data: data),
+                            screen: ProductOverviewScreen(
+                              data: data,
+                              collection: 'nonVegPizza',
+                              id: id.id,
+                            ),
                           );
                         },
                         child: HomeScreenItemsCard(data: data),
