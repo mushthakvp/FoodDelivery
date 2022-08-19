@@ -28,12 +28,17 @@ class VegPizaWidget extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: list.length,
                   itemBuilder: (context, index) {
+                    final id = streamSnapshot.data!.docs[index];
                     final data = list[index];
                     return GestureDetector(
                       onTap: () {
                         context.read<AddOnProductPov>().buttonColorChange(false, context);
                         Routes.push(
-                          screen: ProductOverviewScreen(data: data),
+                          screen: ProductOverviewScreen(
+                            data: data,
+                            collection: 'vegPiza',
+                            id: id.id,
+                          ),
                         );
                       },
                       child: HomeScreenItemsCard(data: data),

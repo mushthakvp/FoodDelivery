@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
 import 'package:provider/provider.dart';
+import '../viewmodel/addon_provider.dart';
 import '../viewmodel/product_overview_pov.dart';
 import 'widget/addon_widget.dart';
 import 'widget/all_info_widget.dart';
@@ -10,11 +11,18 @@ import 'widget/bottom_bar.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
   final HomeProductModel data;
-  const ProductOverviewScreen({Key? key, required this.data}) : super(key: key);
+  final String collection;
+  final String id;
+  const ProductOverviewScreen({
+    Key? key,
+    required this.data,
+    required this.collection, required this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final pov = context.read<AddOnProductPov>();
     return Scaffold(
       backgroundColor: scafoldColor,
       appBar: AppBar(
@@ -23,7 +31,23 @@ class ProductOverviewScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.read<ProductOverviewPov>().addToWhishlist(data: data, context: context);
+              final updateData = HomeProductModel(
+                productPrice: data.productPrice,
+                productOffer: data.productOffer,
+                productRating: data.productRating,
+                productName: data.productName,
+                productDetails: data.productDetails,
+                productImage: data.productImage,
+                productBackdrop: data.productBackdrop,
+                productAddedFavourite: pov.favButton,
+                productShop: data.productShop,
+              );
+              context.read<ProductOverviewPov>().addToWhishlist(
+                    data: updateData,
+                    context: context,
+                    collection: collection,
+                    id : id,
+                  );
             },
             icon: const Icon(Icons.favorite_outline),
             splashRadius: 26,

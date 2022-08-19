@@ -37,7 +37,7 @@ class FavouriteScreen extends StatelessWidget {
                 childAspectRatio: 1 / 1.5,
                 children: List.generate(list.length, (index) {
                   final data = list[index];
-                  return FavouriteListView(data: data);
+                  return FavouriteListView(data: data );
                 }),
               );
             }
