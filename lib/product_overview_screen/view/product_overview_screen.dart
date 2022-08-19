@@ -27,33 +27,7 @@ class ProductOverviewScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: transparentColor,
         actions: [
-          Consumer<AddOnProductPov>(builder: (context, value, _) {
-            return value.favButton
-                ? IconButton(
-                    splashRadius: 26,
-                    onPressed: () {
-                      ProductOverviewPov.addToWhishlist(
-                        data: data,
-                        id: id,
-                        fav: false,
-                      );
-                      value.favButtonChange(favButton: false);
-                    },
-                    icon: const Icon(Icons.favorite, color: redColor),
-                  )
-                : IconButton(
-                    onPressed: () {
-                      ProductOverviewPov.addToWhishlist(
-                        data: data,
-                        id: id,
-                        fav: true,
-                      );
-                      value.favButtonChange(favButton: true);
-                    },
-                    icon: const Icon(Icons.favorite_outline),
-                    splashRadius: 26,
-                  );
-          }),
+          FavouriteButtonWidget(data: data, id: id),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.share),
@@ -117,5 +91,47 @@ class ProductOverviewScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class FavouriteButtonWidget extends StatelessWidget {
+  const FavouriteButtonWidget({
+    Key? key,
+    required this.data,
+    required this.id,
+  }) : super(key: key);
+
+  final HomeProductModel data;
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AddOnProductPov>(builder: (context, value, _) {
+      return value.favButton
+          ? IconButton(
+              splashRadius: 26,
+              onPressed: () {
+                ProductOverviewPov.addToWhishlist(
+                  data: data,
+                  id: id,
+                  fav: false,
+                );
+                value.favButtonChange(favButton: false);
+              },
+              icon: const Icon(Icons.favorite, color: redColor),
+            )
+          : IconButton(
+              onPressed: () {
+                ProductOverviewPov.addToWhishlist(
+                  data: data,
+                  id: id,
+                  fav: true,
+                );
+                value.favButtonChange(favButton: true);
+              },
+              icon: const Icon(Icons.favorite_outline),
+              splashRadius: 26,
+            );
+    });
   }
 }

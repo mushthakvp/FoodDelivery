@@ -28,11 +28,6 @@ class HomeScreen extends StatelessWidget {
             splashRadius: 25,
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-            splashRadius: 25,
-          ),
-          IconButton(
             onPressed: () {
               Routes.push(screen: const FavouriteScreen());
             },
