@@ -2,56 +2,32 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
+import 'package:food_delivery/product_overview_screen/viewmodel/product_overview_pov.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/addon_provider.dart';
-import '../viewmodel/product_overview_pov.dart';
 import 'widget/addon_widget.dart';
 import 'widget/all_info_widget.dart';
 import 'widget/bottom_bar.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
   final HomeProductModel data;
-  final String collection;
   final String id;
   const ProductOverviewScreen({
     Key? key,
     required this.data,
-    required this.collection, required this.id,
+    required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final pov = context.read<AddOnProductPov>();
     return Scaffold(
       backgroundColor: scafoldColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: transparentColor,
         actions: [
-          IconButton(
-            onPressed: () {
-              final updateData = HomeProductModel(
-                productPrice: data.productPrice,
-                productOffer: data.productOffer,
-                productRating: data.productRating,
-                productName: data.productName,
-                productDetails: data.productDetails,
-                productImage: data.productImage,
-                productBackdrop: data.productBackdrop,
-                productAddedFavourite: pov.favButton,
-                productShop: data.productShop,
-              );
-              context.read<ProductOverviewPov>().addToWhishlist(
-                    data: updateData,
-                    context: context,
-                    collection: collection,
-                    id : id,
-                  );
-            },
-            icon: const Icon(Icons.favorite_outline),
-            splashRadius: 26,
-          ),
+          FavouriteButtonWidget(data: data, id: id),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.share),
@@ -67,16 +43,13 @@ class ProductOverviewScreen extends StatelessWidget {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          Hero(
-            tag: data.productName,
-            child: Container(
-              height: 200,
-              width: 250,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(data.productBackdrop),
-                  fit: BoxFit.contain,
-                ),
+          Container(
+            height: 200,
+            width: 250,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(data.productBackdrop),
+                fit: BoxFit.contain,
               ),
             ),
           ),
@@ -118,5 +91,47 @@ class ProductOverviewScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class FavouriteButtonWidget extends StatelessWidget {
+  const FavouriteButtonWidget({
+    Key? key,
+    required this.data,
+    required this.id,
+  }) : super(key: key);
+
+  final HomeProductModel data;
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AddOnProductPov>(builder: (context, value, _) {
+      return value.favButton
+          ? IconButton(
+              splashRadius: 26,
+              onPressed: () {
+                ProductOverviewPov.addToWhishlist(
+                  data: data,
+                  id: id,
+                  fav: false,
+                );
+                value.favButtonChange(favButton: false);
+              },
+              icon: const Icon(Icons.favorite, color: redColor),
+            )
+          : IconButton(
+              onPressed: () {
+                ProductOverviewPov.addToWhishlist(
+                  data: data,
+                  id: id,
+                  fav: true,
+                );
+                value.favButtonChange(favButton: true);
+              },
+              icon: const Icon(Icons.favorite_outline),
+              splashRadius: 26,
+            );
+    });
   }
 }

@@ -28,11 +28,6 @@ class HomeScreen extends StatelessWidget {
             splashRadius: 25,
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-            splashRadius: 25,
-          ),
-          IconButton(
             onPressed: () {
               Routes.push(screen: const FavouriteScreen());
             },
@@ -45,10 +40,10 @@ class HomeScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: const [
           Carouselwidget(),
-          ViewAllWidget(name: 'Non - Veg Pizza'),
+          ViewAllWidget(name: 'Non - Veg Pizza', collection: 'nonVegPizza'),
           SizedBox(height: 10),
           NonVegPizaWidget(),
-          ViewAllWidget(name: 'Vegetarian Pizza'),
+          ViewAllWidget(name: 'Vegetarian Pizza', collection: 'vegPiza'),
           SizedBox(height: 10),
           VegPizaWidget(),
         ],

@@ -86,19 +86,16 @@ class HomeScreenItemsCard extends StatelessWidget {
               left: 0.0,
               right: 0.0,
               child: Center(
-                child: Hero(
-                  tag: data.productName,
-                  child: Container(
-                    height: 110,
-                    width: 110,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(data.productImage),
-                        fit: BoxFit.cover,
-                      ),
-                      color: scafoldColor,
-                      shape: BoxShape.circle,
+                child: Container(
+                  height: 110,
+                  width: 110,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(data.productImage),
+                      fit: BoxFit.cover,
                     ),
+                    color: scafoldColor,
+                    shape: BoxShape.circle,
                   ),
                 ),
               ),
