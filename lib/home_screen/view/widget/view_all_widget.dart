@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/routes/routes.dart';
+import 'package:food_delivery/view_all_screen/view/viewall_screen.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
 
 class ViewAllWidget extends StatelessWidget {
   final String name;
-  const ViewAllWidget({Key? key, required this.name}) : super(key: key);
+  final String collection;
+  const ViewAllWidget({Key? key, required this.name, required this.collection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +20,14 @@ class ViewAllWidget extends StatelessWidget {
             name,
             style: gFontsOleo(cl: whiteColor, fw: FontWeight.bold, ls: 1),
           ),
-          Text(
-            'VIEW ALL',
-            style: gFontsOleo(cl: greyColor, sz: 14),
+          GestureDetector(
+            onTap: () {
+              Routes.push(screen: ViewAllScreen(collection: collection));
+            },
+            child: Text(
+              'VIEW ALL',
+              style: gFontsOleo(cl: greyColor, sz: 14),
+            ),
           ),
         ],
       ),

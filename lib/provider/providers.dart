@@ -8,6 +8,7 @@ import '../home_screen/viewmodel/home_pov.dart';
 import '../product_overview_screen/viewmodel/addon_provider.dart';
 import '../sign_screen/viewmodel/auth_pov.dart';
 import '../splash_screen/viewmodel/splash_pov.dart';
+import '../view_all_screen/viewmodel/view_provider.dart';
 
 class Providers {
   static Widget providers() {
@@ -19,6 +20,7 @@ class Providers {
         ChangeNotifierProvider<HomeCarouselPov>(create: (context) => HomeCarouselPov()),
         ChangeNotifierProvider<AddOnProductPov>(create: (context) => AddOnProductPov()),
         ChangeNotifierProvider<FavouritePov>(create: (context) => FavouritePov()),
+        ChangeNotifierProvider<ViewAllPov>(create: (context) => ViewAllPov()),
       ],
       child: const MyApp(),
     );
