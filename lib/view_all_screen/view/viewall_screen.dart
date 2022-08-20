@@ -8,6 +8,7 @@ import '../viewmodel/view_provider.dart';
 import '../viewmodel/viewmodel_provider.dart';
 import 'widget/allitems_card.dart';
 import 'widget/custom_serch_widget.dart';
+import 'widget/search_all_items.dart';
 
 class ViewAllScreen extends StatelessWidget {
   final String collection;
@@ -15,6 +16,7 @@ class ViewAllScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pov = context.read<ViewAllModelPov>();
     return SafeArea(
       child: Scaffold(
         backgroundColor: scafoldColor,
@@ -43,27 +45,52 @@ class ViewAllScreen extends StatelessWidget {
             },
           ),
         ),
-        body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection(collection).snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            List<ViewAllProductModel> list = ViewAllModelPov.convertToList(streamSnapshot);
-            return GridView.count(
-              physics: const BouncingScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              crossAxisSpacing: 3,
-              childAspectRatio: 1 / 1.58,
-              children: List.generate(
-                list.length,
-                (index) {
-                  // final id = streamSnapshot.data!.docs[index];
-                  final data = list[index];
-                  return ViewAllItemsCard(data: data);
-                },
-              ),
-            );
-          },
-        ),
+        body: Consumer<ViewAllPov>(builder: (context, value, _) {
+          return value.searchResult.isNotEmpty
+              ? GridView.count(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 3,
+                  childAspectRatio: 1 / 1.58,
+                  children: List.generate(
+                    value.searchResult.length,
+                    (index) {
+                      // final id = streamSnapshot.data!.docs[index];
+                      final data = value.searchResult[index];
+                      return SearchAllItemsCard(data: data);
+                    },
+                  ),
+                )
+              : value.initSearching
+                  ? StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection(collection).snapshots(),
+                      builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                        List<ViewAllProductModel> list = pov.convertToList(streamSnapshot);
+                        return GridView.count(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 3,
+                          childAspectRatio: 1 / 1.58,
+                          children: List.generate(
+                            list.length,
+                            (index) {
+                              // final id = streamSnapshot.data!.docs[index];
+                              final data = list[index];
+                              return ViewAllItemsCard(data: data);
+                            },
+                          ),
+                        );
+                      },
+                    )
+                  : Center(
+                      child: Text(
+                        'no data',
+                        style: gFontsOleo(cl: whiteColor),
+                      ),
+                    );
+        }),
       ),
     );
   }

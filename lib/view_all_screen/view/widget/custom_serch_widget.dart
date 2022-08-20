@@ -61,6 +61,7 @@ class CustomSearchWidget extends StatelessWidget {
             ),
           ),
           onChanged: (String data) {
+            pov.searchFilter(query: data, context: context);
             pov.changeSearchValues(data.trim());
           },
         ),
