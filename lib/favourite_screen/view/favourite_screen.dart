@@ -24,24 +24,29 @@ class FavouriteScreen extends StatelessWidget {
         backgroundColor: cardColor,
       ),
       body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: StreamBuilder(
-              stream: pov.vegCollection.snapshots(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                List<HomeProductModel> list = pov.convertToList(streamSnapshot);
-                return GridView.count(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 3,
-                  childAspectRatio: 1 / 1.58,
-                  children: List.generate(list.length, (index) {
-                    final id = streamSnapshot.data!.docs[index];
-                    final data = list[index];
-                    return FavouriteListView(data: data, id: id.id);
-                  }),
-                );
-              })),
+        padding: const EdgeInsets.all(8.0),
+        child: StreamBuilder(
+          stream: pov.vegCollection.snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+            List<HomeProductModel> list = pov.convertToList(streamSnapshot);
+            return GridView.count(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              crossAxisSpacing: 3,
+              childAspectRatio: 1 / 1.58,
+              children: List.generate(
+                list.length,
+                (index) {
+                  final id = streamSnapshot.data!.docs[index];
+                  final data = list[index];
+                  return FavouriteListView(data: data, id: id.id);
+                },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
