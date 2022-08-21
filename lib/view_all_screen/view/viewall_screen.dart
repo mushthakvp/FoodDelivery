@@ -52,7 +52,7 @@ class ViewAllScreen extends StatelessWidget {
                   shrinkWrap: true,
                   crossAxisCount: 2,
                   crossAxisSpacing: 3,
-                  childAspectRatio: 1 / 1.58,
+                  childAspectRatio: 1 / 1.35,
                   children: List.generate(
                     value.searchResult.length,
                     (index) {
@@ -72,7 +72,7 @@ class ViewAllScreen extends StatelessWidget {
                           shrinkWrap: true,
                           crossAxisCount: 2,
                           crossAxisSpacing: 3,
-                          childAspectRatio: 1 / 1.58,
+                          childAspectRatio: 1 / 1.35,
                           children: List.generate(
                             list.length,
                             (index) {
