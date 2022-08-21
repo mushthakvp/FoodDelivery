@@ -27,8 +27,8 @@ class FavouriteListView extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Container(
-              height: 250,
-              width: 220,
+              height: 200,
+              width: 190,
               margin: const EdgeInsets.all(6),
               padding: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
@@ -53,35 +53,21 @@ class FavouriteListView extends StatelessWidget {
                   ),
                   FavouriteRatingWidget(data: data),
                   const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        '30\nMin',
-                        textAlign: TextAlign.center,
-                        style: gFontsOleo(cl: greyColor, sz: 14),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          5,
-                          (index) => Container(
-                            height: 3,
-                            width: 3,
-                            margin: const EdgeInsets.only(bottom: 4),
-                            decoration: BoxDecoration(
-                              color: greyColor,
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'MRP ',
+                          style: gFontsOleo(cl: whiteColor, sz: 14),
                         ),
-                      ),
-                      Text(
-                        'MRP\n₹ ${data.productPrice}',
-                        style: gFontsOleo(cl: greyColor, sz: 14),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                        Text(
+                          "₹ ${data.productOffer}",
+                          style: gFontsOleo(cl: whiteColor),
+                        )
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Padding(
@@ -141,7 +127,7 @@ class FavouriteListView extends StatelessWidget {
               child: Center(
                 child: Container(
                   height: 90,
-                  width: 100,
+                  width: 90,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(data.productImage),
