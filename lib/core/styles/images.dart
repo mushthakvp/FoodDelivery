@@ -4,3 +4,7 @@ String sauseImage = 'assets/images/sausre.png';
 String mayonaise = 'assets/images/mayonaise.png';
 String cheese = 'assets/images/cheese.png';
 String offerImage = 'assets/images/offer.png';
+
+// json files
+
+String searchLottie = 'assets/images/search.json';
