@@ -18,4 +18,8 @@ class ProductOverviewPov {
     );
     FirebaseFirestore.instance.collection('userDetails').doc(FirebaseAuth.instance.currentUser!.email).collection('whishList').doc(data.productName).set(favData.toSnapshot());
   }
+
+  static deleteWhishlist(String name) {
+    FirebaseFirestore.instance.collection('userDetails').doc(FirebaseAuth.instance.currentUser!.email).collection('whishList').doc(name).delete();
+  }
 }
