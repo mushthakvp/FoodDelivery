@@ -9,6 +9,8 @@ class ViewAllPov extends ChangeNotifier {
   }
   //search field controller
 
+  FocusNode focus = FocusNode();
+
   final searchController = TextEditingController();
   //search button
 
@@ -40,6 +42,7 @@ class ViewAllPov extends ChangeNotifier {
     if (searchValues.trim().isEmpty) {
       searchValueChange(true);
     } else {
+      searchResult.clear();
       initSearching = true;
       searchResult.clear();
       searchValueChecking = false;
@@ -58,7 +61,7 @@ class ViewAllPov extends ChangeNotifier {
 
   searchListFetchData() async {
     allResultData.clear();
-    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection("nonVegPizza").get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection('nonVegPizza').get();
     final list = snapshot.docs.map((docSnapshot) => SearchModelItems.fromSnapshot(docSnapshot)).toList();
     allResultData.addAll(list.reversed);
     notifyListeners();

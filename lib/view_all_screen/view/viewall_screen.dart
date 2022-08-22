@@ -13,8 +13,9 @@ import 'widget/custom_serch_widget.dart';
 import 'widget/search_all_items.dart';
 
 class ViewAllScreen extends StatelessWidget {
-  final String collection;
-  const ViewAllScreen({Key? key, required this.collection}) : super(key: key);
+  final String? collection;
+
+  const ViewAllScreen({Key? key, this.collection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class ViewAllScreen extends StatelessWidget {
                       IconButton(
                         splashRadius: 26,
                         onPressed: () {
+                          value.focus.requestFocus();
                           value.searchValueChange(false);
                         },
                         icon: const Icon(Icons.search),
@@ -65,7 +67,7 @@ class ViewAllScreen extends StatelessWidget {
               )
             : value.initSearching
                 ? StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection(collection).snapshots(),
+                    stream: FirebaseFirestore.instance.collection(collection!).snapshots(),
                     builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                       List<ViewAllProductModel> list = pov.convertToList(streamSnapshot);
                       return GridView.count(
@@ -85,8 +87,15 @@ class ViewAllScreen extends StatelessWidget {
                       );
                     },
                   )
-                : Center(
-                    child: Lottie.asset(searchLottie, width: 150),
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(child: Lottie.asset(searchLottie, width: 150)),
+                      Text(
+                        "Result N't found",
+                        style: gFontsOleo(cl: whiteColor),
+                      )
+                    ],
                   );
       }),
     );

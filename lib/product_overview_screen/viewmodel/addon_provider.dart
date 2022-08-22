@@ -1,6 +1,9 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
+import '../../view_all_screen/model/search_model.dart';
 
 class AddOnProductPov extends ChangeNotifier {
   Color buttonColor = scafoldColor;
@@ -47,6 +50,15 @@ class AddOnProductPov extends ChangeNotifier {
     return percent.toStringAsFixed(2);
   }
 
+  // checking favourite
 
-  
+  List<SearchModelItems> allResultData = [];
+
+  favouriteListFetchData() async {
+    allResultData.clear();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection('userDetails').doc(FirebaseAuth.instance.currentUser!.email).collection('whishList').get();
+    final list = snapshot.docs.map((docSnapshot) => SearchModelItems.fromSnapshot(docSnapshot)).toList();
+    allResultData.addAll(list.reversed);
+    notifyListeners();
+  }
 }

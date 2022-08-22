@@ -30,6 +30,7 @@ class CustomSearchWidget extends StatelessWidget {
         ),
         width: double.infinity,
         child: TextField(
+          focusNode: pov.focus,
           controller: pov.searchController,
           style: const TextStyle(
             height: 1.3,

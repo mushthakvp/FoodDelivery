@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
-import 'package:food_delivery/product_overview_screen/viewmodel/product_overview_pov.dart';
-import 'package:provider/provider.dart';
-import '../viewmodel/addon_provider.dart';
+import '../viewmodel/product_overview_pov.dart';
 import 'widget/addon_widget.dart';
 import 'widget/all_info_widget.dart';
 import 'widget/bottom_bar.dart';
@@ -106,32 +106,25 @@ class FavouriteButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AddOnProductPov>(builder: (context, value, _) {
-      return value.favButton
-          ? IconButton(
-              splashRadius: 26,
-              onPressed: () {
-                ProductOverviewPov.addToWhishlist(
-                  data: data,
-                  id: id,
-                  fav: false,
-                );
-                value.favButtonChange(favButton: false);
-              },
-              icon: const Icon(Icons.favorite, color: redColor),
-            )
-          : IconButton(
-              onPressed: () {
-                ProductOverviewPov.addToWhishlist(
-                  data: data,
-                  id: id,
-                  fav: true,
-                );
-                value.favButtonChange(favButton: true);
-              },
-              icon: const Icon(Icons.favorite_outline),
-              splashRadius: 26,
-            );
-    });
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('userDetails').doc(FirebaseAuth.instance.currentUser!.email).collection('whishList').where('productName', isEqualTo: data.productName).snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        return snapshot.hasData
+            ? snapshot.data!.docs.isNotEmpty
+                ? IconButton(
+                    onPressed: () {
+                      ProductOverviewPov.deleteWhishlist(data.productName);
+                    },
+                    icon: const Icon(Icons.favorite, color: redColor),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      ProductOverviewPov.addToWhishlist(data: data, id: id, fav: true);
+                    },
+                    icon: const Icon(Icons.favorite_outline),
+                  )
+            : const SizedBox();
+      },
+    );
   }
 }
