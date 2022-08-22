@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/styles/fonts.dart';
 import '../../model/search_model.dart';
+import 'search_star_item_widget.dart';
 
 class SearchAllItemsCard extends StatelessWidget {
   const SearchAllItemsCard({
@@ -44,7 +45,7 @@ class SearchAllItemsCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // ViewAllStarRatingWidget(data: data),
+                  SearchStarWidget(data: data),
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
