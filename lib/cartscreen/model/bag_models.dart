@@ -1,4 +1,4 @@
-class HomeProductModel {
+class BagModels {
   String productName;
   String productImage;
   String productBackdrop;
@@ -7,8 +7,10 @@ class HomeProductModel {
   String productShop;
   num productOffer;
   num productRating;
+  int productCount;
   String productCategory;
-  HomeProductModel({
+  BagModels({
+    required this.productCount,
     required this.productPrice,
     required this.productOffer,
     required this.productRating,
@@ -20,8 +22,9 @@ class HomeProductModel {
     required this.productCategory,
   });
 
-  factory HomeProductModel.fromSnapshot(Map<String, dynamic> snapshot) {
-    return HomeProductModel(
+  factory BagModels.fromSnapshot(Map<String, dynamic> snapshot) {
+    return BagModels(
+      productCount: snapshot["productCount"] ?? 1,
       productCategory: snapshot["productCategory"],
       productShop: snapshot["productShop"],
       productName: snapshot["productName"],
@@ -36,6 +39,7 @@ class HomeProductModel {
 
   Map<String, dynamic> toSnapshot() {
     return {
+      "productCount": productCount,
       "productCategory": productCategory,
       "productBackdrop": productBackdrop,
       "productShop": productShop,

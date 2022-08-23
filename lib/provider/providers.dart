@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/cartscreen/viewmodel/counter_provider.dart';
 import 'package:provider/provider.dart';
+import '../cartscreen/viewmodel/bag_provider.dart';
 import '../favourite_screen/viewmodel/favourite_pov.dart';
 import '../home_screen/viewmodel/bottom_barprovider.dart';
 import '../home_screen/viewmodel/carousel_image_pov.dart';
@@ -25,6 +27,8 @@ class Providers {
         ChangeNotifierProvider<ViewAllPov>(create: (context) => ViewAllPov()),
         ChangeNotifierProvider<ViewAllModelPov>(create: (context) => ViewAllModelPov()),
         ChangeNotifierProvider<HomeBottomNavBar>(create: (context) => HomeBottomNavBar()),
+        ChangeNotifierProvider<CounterPov>(create: (context) => CounterPov()),
+        ChangeNotifierProvider<AddToBagPov>(create: (context) => AddToBagPov()),
       ],
       child: const MyApp(),
     );

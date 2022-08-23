@@ -2,8 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/cartscreen/view/cartscreen.dart';
 import 'package:food_delivery/core/color/colors.dart';
+import 'package:food_delivery/core/styles/fonts.dart';
 import 'package:food_delivery/home_screen/model/home_model.dart';
+import 'package:food_delivery/routes/routes.dart';
+import 'package:provider/provider.dart';
+import '../viewmodel/addon_provider.dart';
 import '../viewmodel/product_overview_pov.dart';
 import 'widget/addon_widget.dart';
 import 'widget/all_info_widget.dart';
@@ -34,7 +39,9 @@ class ProductOverviewScreen extends StatelessWidget {
             splashRadius: 26,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Routes.push(screen: const CartScreen());
+            },
             icon: const Icon(Icons.shopping_cart),
             splashRadius: 26,
           ),
@@ -74,14 +81,37 @@ class ProductOverviewScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Row(
         children: [
-          const BottomWidget(
-            iconColor: whiteColor,
-            icon: Icons.favorite_outline,
-            color: whiteColor,
-            title: 'Add to WishList',
-            backGroundColor: blackColor,
+          Expanded(
+            child: Container(
+              height: 60,
+              color: cardColor,
+              child: Consumer<AddOnProductPov>(builder: (context, value, _) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        value.removeProductQuantity();
+                      },
+                      child: const CounterWidget(icon: Icons.remove),
+                    ),
+                    Text(
+                      '${value.productQt}',
+                      style: gFontsOleo(cl: whiteColor, sz: 20),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        value.addProductQuantity();
+                      },
+                      child: const CounterWidget(icon: Icons.add),
+                    ),
+                  ],
+                );
+              }),
+            ),
           ),
           BottomWidget(
+            data : data,
             iconColor: blackColor,
             icon: Icons.room_service,
             color: blackColor,
@@ -89,6 +119,31 @@ class ProductOverviewScreen extends StatelessWidget {
             backGroundColor: whiteColor.withOpacity(.9),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CounterWidget extends StatelessWidget {
+  final IconData icon;
+  final double iconSize;
+  final double radius;
+  const CounterWidget({
+    this.iconSize = 20,
+    this.radius = 23,
+    Key? key,
+    required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: greyColor.withOpacity(.2),
+      child: Icon(
+        icon,
+        color: whiteColor,
+        size: iconSize,
       ),
     );
   }
@@ -119,7 +174,7 @@ class FavouriteButtonWidget extends StatelessWidget {
                   )
                 : IconButton(
                     onPressed: () {
-                      ProductOverviewPov.addToWhishlist(data: data, id: id, fav: true);
+                      ProductOverviewPov.addToWhishlist(data: data);
                     },
                     icon: const Icon(Icons.favorite_outline),
                   )

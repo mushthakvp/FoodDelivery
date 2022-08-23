@@ -34,7 +34,6 @@ class VegPizaWidget extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         pov2.buttonColorChange(false, context);
-                        pov2.favButtonChange(favButton: data.productAddedFavourite);
                         Routes.push(
                           screen: ProductOverviewScreen(
                             data: data,

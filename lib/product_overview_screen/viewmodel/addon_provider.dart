@@ -61,4 +61,22 @@ class AddOnProductPov extends ChangeNotifier {
     allResultData.addAll(list.reversed);
     notifyListeners();
   }
+
+  // add product quantity
+
+  int productQt = 1;
+
+  removeProductQuantity() {
+    if (productQt > 1) {
+      productQt--;
+      notifyListeners();
+    }
+  }
+
+  addProductQuantity() {
+    if (productQt < 5) {
+      productQt++;
+      notifyListeners();
+    }
+  }
 }
