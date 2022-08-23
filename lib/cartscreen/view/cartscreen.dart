@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/cartscreen/view/widget/bagitemswidget.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:provider/provider.dart';
-
 import '../model/bag_models.dart';
 import '../viewmodel/bag_provider.dart';
 
