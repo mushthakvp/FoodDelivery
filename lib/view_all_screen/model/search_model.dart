@@ -9,7 +9,6 @@ class SearchModelItems {
   String productShop;
   num productOffer;
   num productRating;
-  bool productAddedFavourite;
   String productCategory;
   SearchModelItems({
     required this.productPrice,
@@ -19,7 +18,6 @@ class SearchModelItems {
     required this.productDetails,
     required this.productImage,
     required this.productBackdrop,
-    required this.productAddedFavourite,
     required this.productShop,
     required this.productCategory,
   });
@@ -27,7 +25,6 @@ class SearchModelItems {
   factory SearchModelItems.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return SearchModelItems(
       productCategory: snapshot["productCategory"],
-      productAddedFavourite: snapshot["productAddedFavourite"],
       productShop: snapshot["productShop"],
       productName: snapshot["productName"],
       productOffer: snapshot["productOffer"],
@@ -42,7 +39,6 @@ class SearchModelItems {
   Map<String, dynamic> toSnapshot() {
     return {
       "productCategory": productCategory,
-      "productAddedFavourite": productAddedFavourite,
       "productBackdrop": productBackdrop,
       "productShop": productShop,
       "productName": productName,

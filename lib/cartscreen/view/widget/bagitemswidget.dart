@@ -66,7 +66,7 @@ class BagItemsWidget extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    value.removeProductQuantity(data);
+                                    value.removeProductQuantity(data, context);
                                   },
                                   child: const CounterWidget(
                                     icon: Icons.remove,
@@ -82,7 +82,7 @@ class BagItemsWidget extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    value.addProductQuantity(data);
+                                    value.addProductQuantity(data, context);
                                   },
                                   child: const CounterWidget(
                                     iconSize: 16,
