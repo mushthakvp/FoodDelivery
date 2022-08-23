@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../home_screen/model/home_model.dart';
 
 class ProductOverviewPov {
-  static addToWhishlist({required HomeProductModel data, required String id, required bool fav}) {
+  static addToWhishlist({required HomeProductModel data}) {
     final favData = HomeProductModel(
       productPrice: data.productPrice,
       productOffer: data.productOffer,
@@ -12,7 +12,6 @@ class ProductOverviewPov {
       productDetails: data.productDetails,
       productImage: data.productImage,
       productBackdrop: data.productBackdrop,
-      productAddedFavourite: fav,
       productShop: data.productShop,
       productCategory: data.productCategory,
     );
@@ -21,5 +20,9 @@ class ProductOverviewPov {
 
   static deleteWhishlist(String name) {
     FirebaseFirestore.instance.collection('userDetails').doc(FirebaseAuth.instance.currentUser!.email).collection('whishList').doc(name).delete();
+  }
+
+  static addCartItems({required HomeProductModel data}) {
+    FirebaseFirestore.instance.collection('userDetails').doc(FirebaseAuth.instance.currentUser!.email).collection('cartList').doc(data.productName).set(data.toSnapshot());
   }
 }

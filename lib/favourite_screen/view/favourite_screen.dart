@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/color/colors.dart';
 import 'package:food_delivery/core/styles/fonts.dart';
+import 'package:food_delivery/core/styles/images.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../home_screen/model/home_model.dart';
 import '../viewmodel/favourite_pov.dart';
@@ -45,7 +47,9 @@ class FavouriteScreen extends StatelessWidget {
                       },
                     ),
                   )
-                : const Center(child: CircularProgressIndicator());
+                : Center(
+                    child: Lottie.asset(noDataLottie, width: 250),
+                  );
           },
         ),
       ),
